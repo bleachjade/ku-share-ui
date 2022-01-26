@@ -1,10 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+import HomeScreenLecturesTab from '../../components/HomeScreenLecturesTab';
+
+import Colors from '../../constants/Colors';
+
 const Home = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home Screen</Text>
+      <HomeScreenLecturesTab tabTitle={"New Lectures"}/>
+      <HomeScreenLecturesTab tabTitle={"Trending"}/>
     </View>
   );
 };
@@ -12,9 +18,8 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eb8f8f'
+    backgroundColor: Colors.primaryColor
   },
   text: {
     fontSize: 20,

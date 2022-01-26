@@ -32,7 +32,7 @@ const InstructionPage = () => {
           <Page
             title="How KUShare works?"
             detail="    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa eros fames ullamcorper odio integer. Eu venenatis aliquam sit urna tristique accumsan porta."
-            imageSource={require('../../assets/Learning-remove-bg.gif')}
+            imageSource={require('../../assets/InstructionsIcons/Learning-remove-bg.gif')}
           />
           <Footer
             rightButtonLabel="Next"
@@ -43,9 +43,9 @@ const InstructionPage = () => {
         </View>
         <View key="2">
           <Page
-            title="Welcome to the weather app"
-            detail="    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa eros fames ullamcorper odio integer. Eu venenatis aliquam sit urna tristique accumsan porta."
-
+            title="Share your Lectures"
+            detail="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa eros fames ullamcorper odio integer. Eu venenatis aliquam sit urna tristique accumsan porta."
+            imageSource={require('../../assets/InstructionsIcons/Kids-Studying-from-Home-1.png')}
           />
           <Footer
             rightButtonLabel="Next"
@@ -56,14 +56,14 @@ const InstructionPage = () => {
         </View>
         <View key="3">
           <Page
-            title="Get updates on weather"
+            title="Save your favorite lectures"
             detail="    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa eros fames ullamcorper odio integer. Eu venenatis aliquam sit urna tristique accumsan porta."
-
+            imageSource={require('../../assets/InstructionsIcons/Add-files-1.png')}
           />
           <Footer
             rightButtonLabel="Get Started"
             rightButtonPress={() => {
-              navigation.navigate('Home');
+              navigation.navigate('DrawerMenu');
             }}
           />
         </View>
