@@ -3,8 +3,8 @@ import { View, ImageBackground, StyleSheet } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { useNavigation } from '@react-navigation/native';
 
-import Page from './components/Page';
-import Footer from './components/Footer';
+import Page from '../../components/Page';
+import Footer from '../../components/Footer';
 
 
 const InstructionPage = () => {

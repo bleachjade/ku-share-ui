@@ -6,8 +6,8 @@ import { useFonts } from 'expo-font';
 
 const Page = ({ title, detail, imageSource }) => {
     let [fontsLoaded] = useFonts({
-        'SourceSansPro-Bold': require('../../../assets/fonts/SourceSansPro-Bold.ttf'),
-        'Prompt': require('../../../assets/fonts/Prompt.ttf'),
+        'SourceSansPro-Bold': require('../assets/fonts/SourceSansPro-Bold.ttf'),
+        'Prompt': require('../assets/fonts/Prompt.ttf'),
     });
     if (!fontsLoaded) {
         return <AppLoading />;
