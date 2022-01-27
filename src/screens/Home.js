@@ -6,6 +6,7 @@ import {
 } from "react-native-header-search-bar";
 
 import HomeScreenLecturesTab from "../../components/HomeScreenLecturesTab";
+import HomeScreenNewsTab from "../../components/HomeScreenNewsTab";
 
 import Colors from "../../constants/Colors";
 
@@ -30,7 +31,7 @@ const Home = ({ navigation }) => {
           onChangeText={(text) => console.log(text)}
         />
       </View>
-
+      <HomeScreenNewsTab />
       <HomeScreenLecturesTab tabTitle={"New Lectures"} />
       <HomeScreenLecturesTab tabTitle={"Trending"} />
     </View>

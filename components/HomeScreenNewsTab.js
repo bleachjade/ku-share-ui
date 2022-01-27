@@ -9,28 +9,16 @@ import {
 import React from "react";
 
 import Colors from "../constants/Colors";
-import HomeScreenLecturesItem from "./HomeScreenLecturesItem";
+import HomeScreenNewsItem from "./HomeScreenNewsItem";
 
 import MyHeaderIcon from "./MyHeaderIcon";
 
-const HomeScreenLecturesTab = (props) => {
+const HomeScreenNewsTab = (props) => {
   return (
     <View style={styles.container}>
-      <View style={styles.tabTitle}>
-        <Text style={styles.descriptionText}>{props.tabTitle}</Text>
-        <View style={styles.tabIcon}>
-          <MyHeaderIcon
-            iconName="ios-arrow-forward-outline"
-            style={{ marginLeft: -10 }}
-            onPress={() => {}}
-            color="black"
-          />
-        </View>
-      </View>
         <ScrollView contentContainerStyle={styles.lectureContainers} horizontal={true}>
-          <HomeScreenLecturesItem />
-          <HomeScreenLecturesItem />
-          <HomeScreenLecturesItem />
+          <HomeScreenNewsItem />
+          <HomeScreenNewsItem />
         </ScrollView>
     </View>
   );
@@ -38,9 +26,9 @@ const HomeScreenLecturesTab = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 0,
+    marginTop: 16,
     padding: 12,
-    height: 220,
+    height: 230,
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: Colors.primaryBackground,
@@ -59,15 +47,6 @@ const styles = StyleSheet.create({
     color: "black",
     marginBottom: 10,
   },
-  tabTitle: {
-    flexDirection: "row",
-    width: 387,
-    flex: 1,
-    justifyContent: "space-between",
-  },
-  tabIcon: {
-    paddingRight: 15,
-  },
 });
 
-export default HomeScreenLecturesTab;
+export default HomeScreenNewsTab;
