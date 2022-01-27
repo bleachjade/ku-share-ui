@@ -3,10 +3,14 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from "@react-navigation/stack";
+import { Ionicons, MaterialIcons, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import { StyleSheet, Image } from "react-native";
 
 import Home from "../src/screens/Home";
 import InstructionPage from "../src/screens/InstructionPage";
 import SplashScreen from "../src/screens/SplashScreen";
+
+import Logo from "../components/LogoSvg";
 
 import Colors from "../constants/Colors";
 
@@ -25,13 +29,64 @@ const defaultScreenOptions = {
   headerStyle: {
     backgroundColor: Colors.primaryColor,
   },
-  headerTintColor: "white",
+  headerTintColor: "red",
 };
 
 const DrawerMenu = () => {
   return (
-    <Drawer.Navigator>
-      <Stack.Screen name="Home" component={Home} />
+    <Drawer.Navigator
+      screenOptions={{
+        drawerActiveBackgroundColor: '#04DB8BB3',
+        drawerInactiveBackgroundColor: 'rgba(4, 219, 139, 0.1)',
+        drawerActiveTintColor: '#fff',
+        drawerInactiveTintColor: '#04DB8B',
+      }}
+    >
+      <Stack.Screen name="Logo"
+        component={Home}
+        options={{
+          title: "",
+          headerShown: true,
+          drawerIcon: () => (
+            <Logo style={styles.logo} />
+          ),
+        }} />
+      <Stack.Screen name="Explore"
+        component={Home}
+        options={{
+          title: "Explore",
+          headerShown: true,
+          drawerIcon: () => (
+            <MaterialIcons
+              name="explore"
+              size={24}
+            />
+          ),
+        }} />
+      <Stack.Screen name="Publish"
+      component={Home}
+      options={{
+        title: "Publish",
+        headerShown: true,
+        drawerIcon: () => (
+          <Entypo
+            name="circle-with-plus"
+            size={24}
+          />
+        ),
+      }} />
+      <Stack.Screen name="Your Saved"
+      component={Home}
+      options={{
+        title: "Your Saved",
+        headerShown: true,
+        drawerIcon: () => (
+          <MaterialCommunityIcons
+            name="playlist-star"
+            size={24}
+          />
+        ),
+      }} />
     </Drawer.Navigator>
   );
 };
@@ -48,6 +103,7 @@ const MainNavigator = () => {
         ...defaultScreenOptions,
         gesturesEnabled: false,
         headerShown: false,
+        swipeEnabled: false
       }}
     >
       <Stack.Screen
@@ -61,5 +117,12 @@ const MainNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  logo: {
+    width: "100%",
+    height: 100,
+  },
+});
 
 export default MainNavigator;
