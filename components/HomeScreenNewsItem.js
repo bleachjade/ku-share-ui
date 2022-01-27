@@ -23,10 +23,12 @@ const HomeScreenNewsItem = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "white",
     height: 195,
     width: 200,
     marginHorizontal: 10,
+    marginVertical: 10,
     borderRadius: 10,
   },
   imageStyle: {
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     height: "100%",
     borderRadius: 10,
+    overflow: "hidden"
   },
   newsTitle: {
     padding: 8,

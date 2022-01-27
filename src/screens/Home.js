@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import {
   HeaderSearchBar,
   HeaderClassicSearchBar,
@@ -31,9 +31,11 @@ const Home = ({ navigation }) => {
           onChangeText={(text) => console.log(text)}
         />
       </View>
-      <HomeScreenNewsTab />
-      <HomeScreenLecturesTab tabTitle={"New Lectures"} />
-      <HomeScreenLecturesTab tabTitle={"Trending"} />
+      <ScrollView contentContainerStyle={styles.scrollContainers} >
+        <HomeScreenNewsTab />
+        <HomeScreenLecturesTab tabTitle={"New Lectures"} />
+        <HomeScreenLecturesTab tabTitle={"Trending"} />
+      </ScrollView>
     </View>
   );
 };
@@ -51,7 +53,11 @@ const styles = StyleSheet.create({
   searchBar: {
     backgroundColor: "white",
     width: "100%",
-    borderRadius: 22
+    borderRadius: 22,
+  },
+  scrollContainers: {
+    flexDirection: "column",
+    alignItems: "flex-start",
   }
 });
 

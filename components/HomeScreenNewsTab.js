@@ -19,6 +19,7 @@ const HomeScreenNewsTab = (props) => {
         <ScrollView contentContainerStyle={styles.lectureContainers} horizontal={true}>
           <HomeScreenNewsItem />
           <HomeScreenNewsItem />
+          <HomeScreenNewsItem />
         </ScrollView>
     </View>
   );
@@ -30,15 +31,14 @@ const styles = StyleSheet.create({
     padding: 12,
     height: 230,
     flexDirection: "column",
-    alignItems: "center",
     backgroundColor: Colors.primaryBackground,
-    marginRight: 0,
-    paddingRight: 0,
+    flexGrow: 1
   },
   lectureContainers: {
     width: 387,
     flexDirection: "row",
     alignItems: "flex-start",
+    paddingRight: 60
   },
   descriptionText: {
     fontFamily: "Prompt",
