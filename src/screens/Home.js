@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: Colors.primaryColor
+    backgroundColor: Colors.primaryColorOpacityDown
   },
   text: {
     fontSize: 20,
