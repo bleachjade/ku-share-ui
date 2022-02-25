@@ -3,7 +3,12 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from "@react-navigation/stack";
-import { Ionicons, MaterialIcons, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Ionicons,
+  MaterialIcons,
+  Entypo,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { StyleSheet, Image } from "react-native";
 
 import Home from "../src/screens/Home";
@@ -32,61 +37,55 @@ const defaultScreenOptions = {
   headerTintColor: "red",
 };
 
+
 const DrawerMenu = () => {
   return (
     <Drawer.Navigator
       screenOptions={{
-        drawerActiveBackgroundColor: '#04DB8BB3',
-        drawerInactiveBackgroundColor: 'rgba(4, 219, 139, 0.1)',
-        drawerActiveTintColor: '#fff',
-        drawerInactiveTintColor: '#04DB8B',
+        drawerActiveBackgroundColor: "#04DB8BB3",
+        drawerInactiveBackgroundColor: "rgba(4, 219, 139, 0.1)",
+        drawerActiveTintColor: "#fff",
+        drawerInactiveTintColor: "#04DB8B",
       }}
     >
-      <Stack.Screen name="Logo"
+      <Stack.Screen
+        name="Logo"
         component={Home}
         options={{
           title: "",
           headerShown: true,
-          drawerIcon: () => (
-            <Logo style={styles.logo} />
-          ),
-        }} />
-      <Stack.Screen name="Explore"
+          drawerIcon: () => <Logo style={styles.logo} />,
+        }}
+      />
+      <Stack.Screen
+        name="Explore"
         component={Home}
         options={{
           title: "Explore",
           headerShown: true,
+          drawerIcon: () => <MaterialIcons name="explore" size={24} />,
+        }}
+      />
+      <Stack.Screen
+        name="Publish"
+        component={Home}
+        options={{
+          title: "Publish",
+          headerShown: true,
+          drawerIcon: () => <Entypo name="circle-with-plus" size={24} />,
+        }}
+      />
+      <Stack.Screen
+        name="Your Saved"
+        component={Home}
+        options={{
+          title: "Your Saved",
+          headerShown: true,
           drawerIcon: () => (
-            <MaterialIcons
-              name="explore"
-              size={24}
-            />
+            <MaterialCommunityIcons name="playlist-star" size={24} />
           ),
-        }} />
-      <Stack.Screen name="Publish"
-      component={Home}
-      options={{
-        title: "Publish",
-        headerShown: true,
-        drawerIcon: () => (
-          <Entypo
-            name="circle-with-plus"
-            size={24}
-          />
-        ),
-      }} />
-      <Stack.Screen name="Your Saved"
-      component={Home}
-      options={{
-        title: "Your Saved",
-        headerShown: true,
-        drawerIcon: () => (
-          <MaterialCommunityIcons
-            name="playlist-star"
-            size={24}
-          />
-        ),
-      }} />
+        }}
+      />
     </Drawer.Navigator>
   );
 };
@@ -103,7 +102,7 @@ const MainNavigator = () => {
         ...defaultScreenOptions,
         gesturesEnabled: false,
         headerShown: false,
-        swipeEnabled: false
+        swipeEnabled: false,
       }}
     >
       <Stack.Screen
