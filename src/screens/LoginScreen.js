@@ -12,6 +12,7 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  Alert,
 } from "react-native";
 import { useDispatch } from "react-redux";
 
@@ -19,17 +20,19 @@ import Loader from "../../components/Loader";
 import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
 
+import * as authActions from "../../store/actions/auth"
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = (props) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
+  const [formValid, setFormIsValid] = useState(false);
 
   const passwordInputRef = createRef();
 
-  const backgroundImage = require('../../assets/login_bg.png');
+  const backgroundImage = require("../../assets/login_bg.png");
 
   const dispatch = useDispatch();
 
@@ -64,92 +67,111 @@ const LoginScreen = ({ navigation }) => {
         console.log({ userEmail, userPassword });
         dispatch(authActions.signup(userEmail, userPassword));
       }
+      // props.navigation.replace("DrawerMenu");
     } else {
       console.log("form is not valid!");
-      Alert.alert("Forms is not valid!", "Please make sure the form(s) are valid and is not empty!", [
-        { text: "Okay" },
-      ]);
+      Alert.alert(
+        "Forms is not valid!",
+        "Please make sure the form(s) are valid and is not empty!",
+        [{ text: "Okay" }]
+      );
     }
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <ImageBackground source={backgroundImage} resizeMode='cover' style={styles.background}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
+      <ImageBackground
+        source={backgroundImage}
+        resizeMode="cover"
+        style={styles.background}
       >
-        <Image
-          source={require("../../assets/drawer-logo2x.png")}
-          style={{ width: "100%", height: 60, resizeMode: "contain", margin: 10 }}
-        />
-        
-        <View>
-          <Loader loading={false} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.container}
+        >
+          <Image
+            source={require("../../assets/drawer-logo2x.png")}
+            style={{
+              width: "100%",
+              height: 60,
+              resizeMode: "contain",
+              margin: 10,
+            }}
+          />
 
-          <View style={styles.inputBoxesContainer}>
-            
-            <View>
-              <TextInput
-                style={styles.textInputEmail}
-                onChangeText={(UserEmail) => setUserEmail(UserEmail)}
-                placeholder="E-mail" //dummy@abc.com
-                placeholderTextColor="#8b9cb5"
-                autoCapitalize="none"
-                keyboardType="email-address"
-                returnKeyType="next"
-                onSubmitEditing={() =>
-                  passwordInputRef.current && passwordInputRef.current.focus()
-                }
-                underlineColorAndroid="#f000"
-                blurOnSubmit={false}
-              />
-              <TextInput
-                style={styles.textInputEmail}
-                onChangeText={(UserPassword) => setUserPassword(UserPassword)}
-                placeholder="Password" //12345
-                placeholderTextColor="#8b9cb5"
-                keyboardType="default"
-                ref={passwordInputRef}
-                onSubmitEditing={Keyboard.dismiss}
-                blurOnSubmit={false}
-                secureTextEntry={true}
-                underlineColorAndroid="#f000"
-                returnKeyType="done"
-              />
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                activeOpacity={0.5}
-                onPress={handleFormSubmit}
-              >
-                <Text style={styles.buttonTextStyle}>
-                  {isSignUp ? "Sign Up" : "Login"}
-                </Text>
-              </TouchableOpacity>
+          <View>
+            <Loader loading={false} />
 
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                activeOpacity={0.5}
-                onPress={formModeSwitch}
-              >
-                <Text style={styles.buttonTextStyle}>
-                  Switch to {isSignUp ? "Login" : "Sign Up"}
-                </Text>
-              </TouchableOpacity>
+            <View style={styles.inputBoxesContainer}>
+              <View>
+                <TextInput
+                  style={styles.textInputEmail}
+                  autoCorrect={false}
+                  onChangeText={(UserEmail) => setUserEmail(UserEmail)}
+                  placeholder="E-mail" //dummy@abc.com
+                  placeholderTextColor="#8b9cb5"
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                  returnKeyType="next"
+                  onSubmitEditing={() =>
+                    passwordInputRef.current && passwordInputRef.current.focus()
+                  }
+                  underlineColorAndroid="#f000"
+                  blurOnSubmit={false}
+                />
+                <TextInput
+                  style={styles.textInputEmail}
+                  onChangeText={(UserPassword) => setUserPassword(UserPassword)}
+                  placeholder="Password" //12345
+                  placeholderTextColor="#8b9cb5"
+                  keyboardType="default"
+                  ref={passwordInputRef}
+                  onSubmitEditing={() => {
+                    formChangeHandler();
+                    Keyboard.dismiss();
+                  }}
+                  blurOnSubmit={false}
+                  secureTextEntry={true}
+                  underlineColorAndroid="#f000"
+                  returnKeyType="done"
+                />
+                <TouchableOpacity
+                  style={styles.buttonStyle}
+                  activeOpacity={0.5}
+                  onPress={handleFormSubmit}
+                >
+                  <View style={styles.buttonTextField}>
+                    <Text style={styles.buttonTextStyle}>
+                      {isSignUp ? "Sign Up" : "Login"}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.buttonStyle}
+                  activeOpacity={0.5}
+                  onPress={formModeSwitch}
+                >
+                  <View style={styles.buttonTextField}>
+                    <Text style={styles.buttonTextStyle}>
+                      Switch to {isSignUp ? "Login" : "Sign Up"}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
       </ImageBackground>
     </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
-background: {
+  background: {
     flex: 1,
-    justifyContent: 'center',
-    },
+    justifyContent: "center",
+  },
   container: {
     flex: 1,
     alignItems: "center",
@@ -175,33 +197,38 @@ background: {
     padding: 30,
     backgroundColor: Colors.boxes,
     borderRadius: 15,
-    shadowColor: 'black',
+    shadowColor: "black",
     shadowOpacity: 0.26,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 8,
   },
   buttonStyle: {
-    backgroundColor: Colors.accentColor,
-    shadowColor: 'black',
+    backgroundColor: Colors.primaryColor,
+    shadowColor: "black",
     shadowOpacity: 0.26,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 8,
     borderWidth: 0,
     color: "#FFFFFF",
     borderColor: "#7DE24E",
-    height: 40,
+    height: 50,
     alignItems: "center",
     borderRadius: 30,
     marginLeft: 35,
     marginRight: 35,
     marginTop: 20,
-    marginBottom: 25,
+    flexDirection: "row",
+  },
+  buttonTextField: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 50,
+    width: 235,
   },
   buttonTextStyle: {
     color: "white",
-    paddingVertical: 10,
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
 });
 

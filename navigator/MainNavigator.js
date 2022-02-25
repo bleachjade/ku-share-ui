@@ -89,11 +89,6 @@ const DrawerMenu = () => {
           />
         ),
       }} />
-      <Stack.Screen
-        name="AuthenticationScreen"
-        component={AuthenticationScreen}
-        options={{ headerShown: false }}
-      />
     </Drawer.Navigator>
   );
 };
@@ -120,6 +115,11 @@ const MainNavigator = () => {
         screenOptions={defaultScreenOptions}
       />
       <Stack.Screen name="InstructionPage" component={InstructionPage} />
+      <Stack.Screen
+        name="AuthenticationScreen"
+        component={AuthenticationScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="DrawerMenu" component={DrawerMenu} />
     </Stack.Navigator>
   );

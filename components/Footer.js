@@ -1,34 +1,47 @@
-import React from 'react';
-import { View, useWindowDimensions } from 'react-native';
+import React from "react";
+import {
+  View,
+  useWindowDimensions,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 
-import RoundedButton from './RoundedButton';
 
-const Footer = ({
-  rightButtonLabel = false,
-  rightButtonPress = false
-}) => {
+const Footer = (props) => {
   const windowWidth = useWindowDimensions().width;
   const HEIGHT = windowWidth * 0.21;
   const FOOTER_PADDING = windowWidth * 0.1;
 
+  const label = props.rightButtonLabel;
+
   return (
-    <View
+    <TouchableOpacity
       style={{
-        flexDirection: 'row',
-        justifyContent: 'center',
+        flexDirection: "row",
+        justifyContent: "center",
         height: HEIGHT,
-        backgroundColor: '#04DB8B',
+        backgroundColor: "#04DB8B",
         opacity: 0.6,
-        alignItems: 'center',
+        alignItems: "center",
         paddingHorizontal: FOOTER_PADDING,
         marginTop: 15,
         marginHorizontal: 25,
         marginBottom: 50,
         borderRadius: 10,
       }}
+      onPress={props.rightButtonPress}
     >
-      <RoundedButton label={rightButtonLabel} onPress={rightButtonPress} />
-    </View>
+      <Text
+        style={{
+          fontSize: 28,
+          color: "white",
+          fontWeight: "bold",
+          textTransform: "uppercase",
+        }}
+      >
+        {label}
+      </Text>
+    </TouchableOpacity>
   );
 };
 
