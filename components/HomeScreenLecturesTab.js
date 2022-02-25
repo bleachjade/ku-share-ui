@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     height: 220,
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: Colors.primaryBackground,
+    // backgroundColor: Colors.primaryColorOpacityDown,
     marginRight: 0,
     paddingRight: 0,
   },

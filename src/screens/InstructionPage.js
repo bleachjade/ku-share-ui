@@ -45,7 +45,7 @@ const InstructionPage = () => {
           <Page
             title="Share your Lectures"
             detail="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa eros fames ullamcorper odio integer. Eu venenatis aliquam sit urna tristique accumsan porta."
-            imageSource={require('../../assets/InstructionsIcons/Kids-Studying-from-Home-1.png')}
+            imageSource={require('../../assets/InstructionsIcons/kids-studying-remove-bg.gif')}
           />
           <Footer
             rightButtonLabel="Next"
@@ -56,9 +56,10 @@ const InstructionPage = () => {
         </View>
         <View key="3">
           <Page
-            title="Save your favorite lectures"
-            detail="    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa eros fames ullamcorper odio integer. Eu venenatis aliquam sit urna tristique accumsan porta."
-            imageSource={require('../../assets/InstructionsIcons/Add-files-1.png')}
+            title="Save yours favourite
+            lectures"
+            detail="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa eros fames ullamcorper odio integer. Eu venenatis aliquam sit urna tristique accumsan porta."
+            imageSource={require('../../assets/InstructionsIcons/add-files-remove-bg.gif')}
           />
           <Footer
             rightButtonLabel="Get Started"

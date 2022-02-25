@@ -43,8 +43,8 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: Colors.primaryBackground,
+    alignItems: 'center',
+    backgroundColor: Colors.primaryColorOpacityDown
   },
   text: {
     fontSize: 20,
