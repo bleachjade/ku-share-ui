@@ -9,6 +9,8 @@ import { StyleSheet, Image } from "react-native";
 import Home from "../src/screens/Home";
 import InstructionPage from "../src/screens/InstructionPage";
 import SplashScreen from "../src/screens/SplashScreen";
+import AuthenticationScreen from "../src/screens/AuthenticationScreen";
+
 
 import Logo from "../components/LogoSvg";
 
@@ -87,6 +89,11 @@ const DrawerMenu = () => {
           />
         ),
       }} />
+      <Stack.Screen
+        name="AuthenticationScreen"
+        component={AuthenticationScreen}
+        options={{ headerShown: false }}
+      />
     </Drawer.Navigator>
   );
 };
