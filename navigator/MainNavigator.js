@@ -51,6 +51,7 @@ const defaultScreenOptions = {
 const DrawerMenu = () => {
   return (
     <Drawer.Navigator
+      style={styles.drawerMenu}
       screenOptions={{
         drawerActiveBackgroundColor: '#04DB8BB3',
         drawerInactiveBackgroundColor: 'rgba(4, 219, 139, 0.1)',
@@ -155,6 +156,9 @@ const styles = StyleSheet.create({
   logo: {
     width: "100%",
     height: 100,
+  },
+  drawerMenu: {
+    flex: 0
   },
 });
 

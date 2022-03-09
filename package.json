@@ -26,6 +26,7 @@
     "react-native": "0.64.3",
     "react-native-androw": ">= 0.0.33",
     "react-native-dynamic-vector-icons": ">= 0.2.1",
+    "react-native-elements": "^3.4.2",
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^2.1.1",
     "react-native-header-search-bar": "^0.1.10",
