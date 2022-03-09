@@ -79,6 +79,11 @@ const LoginScreen = ({ navigation }) => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
       >
+          <Button
+            title="< Back"
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}
+        />
         <Image
           source={require("../../assets/drawer-logo2x.png")}
           style={{ width: "100%", height: 60, resizeMode: "contain", margin: 10 }}
@@ -203,6 +208,9 @@ background: {
     fontSize: 16,
     fontWeight: 'bold'
   },
+  backButton: {
+      position: "absolute"
+  }
 });
 
 export default LoginScreen;
