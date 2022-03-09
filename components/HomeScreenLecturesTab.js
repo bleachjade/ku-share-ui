@@ -5,6 +5,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  Dimensions 
 } from "react-native";
 import React from "react";
 
@@ -16,18 +17,20 @@ import MyHeaderIcon from "./MyHeaderIcon";
 const HomeScreenLecturesTab = (props) => {
   return (
     <View style={styles.container}>
-      <View style={styles.tabTitle}>
-        <Text style={styles.descriptionText}>{props.tabTitle}</Text>
-        <View style={styles.tabIcon}>
-          <MyHeaderIcon
-            iconName="ios-arrow-forward-outline"
-            style={{ marginLeft: -10 }}
-            onPress={() => {}}
-            color="black"
-          />
-        </View>
+      <View style={styles.tabTitleContainer}>
+          <Text style={styles.descriptionText}>{props.tabTitle}</Text>
+            <MyHeaderIcon
+              iconName="ios-arrow-forward-outline"
+              style={{ marginLeft: -10 }}
+              onPress={() => {}}
+              color="black"
+            />
       </View>
         <ScrollView contentContainerStyle={styles.lectureContainers} horizontal={true}>
+          <HomeScreenLecturesItem />
+          <HomeScreenLecturesItem />
+          <HomeScreenLecturesItem />
+          <HomeScreenLecturesItem />
           <HomeScreenLecturesItem />
           <HomeScreenLecturesItem />
           <HomeScreenLecturesItem />
@@ -48,25 +51,23 @@ const styles = StyleSheet.create({
     paddingRight: 0,
   },
   lectureContainers: {
-    width: 387,
-    flexDirection: "row",
-    alignItems: "flex-start",
+    // width: 387,
+    // flexDirection: "row",
+    // alignItems: "flex-start",
   },
   descriptionText: {
     fontFamily: "Prompt",
     fontSize: 15,
     fontWeight: "normal",
     color: "black",
+  },
+  tabTitleContainer: {
+    flex: 1,    
     marginBottom: 10,
-  },
-  tabTitle: {
+    width: Dimensions.get('window').width - 35,
     flexDirection: "row",
-    width: 387,
-    flex: 1,
     justifyContent: "space-between",
-  },
-  tabIcon: {
-    paddingRight: 15,
+    alignItems: "center",
   },
 });
 

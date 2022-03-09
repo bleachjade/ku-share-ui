@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
     flexGrow: 1
   },
   lectureContainers: {
-    width: 387,
-    flexDirection: "row",
-    alignItems: "flex-start",
-    paddingRight: 60
+    // width: 387,
+    // flexDirection: "row",
+    // alignItems: "flex-start",
+    // paddingRight: 60
   },
   descriptionText: {
     fontFamily: "Prompt",

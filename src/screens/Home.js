@@ -31,9 +31,17 @@ const Home = ({ navigation }) => {
           onChangeText={(text) => console.log(text)}
         />
       </View>
-      <ScrollView contentContainerStyle={styles.scrollContainers} horizontal={false}>
+      <ScrollView 
+        contentContainerStyle={styles.scrollContainers} 
+        horizontal={false} 
+        scrollEnabled={true} 
+        bounces={false} 
+        showsVerticalScrollIndicator={false} 
+        >
         <HomeScreenNewsTab />
         <HomeScreenLecturesTab tabTitle={"New Lectures"} />
+        <HomeScreenLecturesTab tabTitle={"Trending"} />
+        <HomeScreenLecturesTab tabTitle={"Trending"} />
         <HomeScreenLecturesTab tabTitle={"Trending"} />
       </ScrollView>
     </View>
