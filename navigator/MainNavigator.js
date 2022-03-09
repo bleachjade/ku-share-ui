@@ -8,16 +8,19 @@ import {
   MaterialIcons,
   Entypo,
   MaterialCommunityIcons,
+  FontAwesome
 } from "@expo/vector-icons";
 import { StyleSheet, Image } from "react-native";
 
 import Home from "../src/screens/Home";
 import InstructionPage from "../src/screens/InstructionPage";
 import SplashScreen from "../src/screens/SplashScreen";
+import Profile from "../src/screens/Profile";
 
 import Logo from "../components/LogoSvg";
 
 import Colors from "../constants/Colors";
+import SinglePost from "../src/screens/SinglePost";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -83,6 +86,28 @@ const DrawerMenu = () => {
           headerShown: true,
           drawerIcon: () => (
             <MaterialCommunityIcons name="playlist-star" size={24} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="SinglePostMock"
+        component={SinglePost}
+        options={{
+          title: "SinglePostMock",
+          headerShown: true,
+          drawerIcon: () => (
+            <FontAwesome name="user" size={24} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: "Profile",
+          headerShown: true,
+          drawerIcon: () => (
+            <FontAwesome name="user" size={24} />
           ),
         }}
       />
