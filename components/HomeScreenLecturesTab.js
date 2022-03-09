@@ -7,6 +7,8 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
+import { NavigationActions } from 'react-navigation'
+import { useNavigation } from "@react-navigation/native";
 
 import Colors from "../constants/Colors";
 import HomeScreenLecturesItem from "./HomeScreenLecturesItem";
@@ -14,15 +16,22 @@ import HomeScreenLecturesItem from "./HomeScreenLecturesItem";
 import MyHeaderIcon from "./MyHeaderIcon";
 
 const HomeScreenLecturesTab = (props) => {
+  const navigation = useNavigation();
+  const { tabTitle } = props
+  
+  const changeScreenHandler = () => {
+    const screenRoute = tabTitle.split(' ').join('') + "Screen";
+    navigation.navigate("LinkToLectureRegistrationScreen", {screen: screenRoute});
+  };
   return (
     <View style={styles.container}>
       <View style={styles.tabTitle}>
-        <Text style={styles.descriptionText}>{props.tabTitle}</Text>
+        <Text style={styles.descriptionText}>{tabTitle}</Text>
         <View style={styles.tabIcon}>
           <MyHeaderIcon
             iconName="ios-arrow-forward-outline"
             style={{ marginLeft: -10 }}
-            onPress={() => {}}
+            onPress={changeScreenHandler}
             color="black"
           />
         </View>

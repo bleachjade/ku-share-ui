@@ -10,6 +10,8 @@ import {
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
+import { useFonts } from 'expo-font';
+
 
 import InstructionPage from "./src/screens/InstructionPage";
 import Home from "./src/screens/Home";
@@ -26,6 +28,14 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default function App() {
+  const [loaded] = useFonts({
+    Prompt: require('./assets/fonts/Prompt.ttf'),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <Provider store={store}>
       <NavigationContainer>
