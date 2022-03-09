@@ -34,13 +34,11 @@ const saveDataToStorage = (
     );
   };
 
-    export const logout = () => {
-    return { type: LOGOUT };
-  };
+
   
   export const authenticate = (userId, token, displayName, userProfile) => {
       console.log("now authenticate")
-      NavigationActions.navigate({ routeName: 'DrawerMenu' });
+      // NavigationActions.navigate({ routeName: 'DrawerMenu' });
     return {
       type: AUTHENTICATE,
       userId: userId,
@@ -146,7 +144,7 @@ const saveDataToStorage = (
         age: resData.age,
         profileImage: resData.profileImage,
       };
-      // console.log(userProfile);
+      console.log(userProfile);
       dispatch(
         authenticate(
           resData.localId,
@@ -173,3 +171,7 @@ const saveDataToStorage = (
       );
     };
   };
+
+export const logout = () => {
+  return { type: LOGOUT };
+};

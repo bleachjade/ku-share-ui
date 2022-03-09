@@ -4,12 +4,16 @@ import {
   TransitionPresets,
 } from "@react-navigation/stack";
 import { Ionicons, MaterialIcons, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 
 import Home from "../src/screens/Home";
 import InstructionPage from "../src/screens/InstructionPage";
 import SplashScreen from "../src/screens/SplashScreen";
 import AuthenticationScreen from "../src/screens/AuthenticationScreen";
+import { useLayoutEffect } from "react";
+import { useDispatch } from "react-redux";
+
+import * as authActions from "../store/actions/auth"
 
 
 import Logo from "../components/LogoSvg";
@@ -18,6 +22,16 @@ import Colors from "../constants/Colors";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
+
+const LogoutButton = (props) => {
+  const dispatch = useDispatch();
+  useLayoutEffect(() => {
+    dispatch(authActions.logout());
+    props.navigation.replace("AuthenticationScreen");
+  }, [props.navigation]);
+
+  return <View></View>;
+};
 
 // const InstructionMenu = () => {
 //     return (
@@ -89,6 +103,18 @@ const DrawerMenu = () => {
           />
         ),
       }} />
+      <Stack.Screen
+        name="Logout"
+        component={LogoutButton}
+        options={{
+          drawerIcon: () => (
+            <MaterialCommunityIcons
+              name="playlist-star"
+              size={24}
+            />
+          )
+        }}
+      />
     </Drawer.Navigator>
   );
 };

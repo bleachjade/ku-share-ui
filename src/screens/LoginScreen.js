@@ -15,6 +15,7 @@ import {
   Alert,
 } from "react-native";
 import { useDispatch } from "react-redux";
+import { NavigationActions } from 'react-navigation'
 
 import Loader from "../../components/Loader";
 import Colors from "../../constants/Colors";
@@ -25,8 +26,8 @@ import * as authActions from "../../store/actions/auth"
 const LoginScreen = (props) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [errortext, setErrortext] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorText, setErrorText] = useState("");
   const [isSignUp, setIsSignUp] = useState(false);
   const [formValid, setFormIsValid] = useState(false);
 
@@ -55,26 +56,35 @@ const LoginScreen = (props) => {
       setFormIsValid(false);
     }
   };
-  const handleFormSubmit = () => {
-    if (formValid) {
-      console.log("form is valid");
-      if (!isSignUp) {
-        console.log("login");
-        console.log({ userEmail, userPassword });
-        dispatch(authActions.login(userEmail, userPassword));
-      } else {
-        console.log("sign up");
-        console.log({ userEmail, userPassword });
-        dispatch(authActions.signup(userEmail, userPassword));
-      }
-      // props.navigation.replace("DrawerMenu");
+  const handleFormSubmit = async () => {
+    let action;
+    if (formValid == false) {
+      Alert.alert("Invalid input!", "Please check the errors in the form.", [
+        { text: "Okay" },
+      ]);
+      return;
+    }
+    console.log("form is valid");
+    // const userEmail = formState.inputValues.userEmail;
+    // const userPassword = formState.inputValues.userPassword;
+    if (!isSignUp) {
+      console.log("login");
+      console.log({ userEmail, userPassword });
+      action = authActions.login(userEmail, userPassword);
     } else {
-      console.log("form is not valid!");
-      Alert.alert(
-        "Forms is not valid!",
-        "Please make sure the form(s) are valid and is not empty!",
-        [{ text: "Okay" }]
-      );
+      console.log("sign up");
+      console.log({ userEmail, userPassword });
+      action = authActions.signup(userEmail, userPassword);
+    }
+    setErrorText(null);
+    setIsLoading(true);
+    try {
+      await dispatch(action);
+      props.navigation.push("DrawerMenu", { fromLogin: "hello from LoginScreen" });
+    } catch (err) {
+      console.log(err.message);
+      setErrorText(err.message);
+      setIsLoading(false);
     }
   };
 
