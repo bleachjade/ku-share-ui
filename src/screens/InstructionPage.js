@@ -64,7 +64,7 @@ const InstructionPage = () => {
           <Footer
             rightButtonLabel="Get Started"
             rightButtonPress={() => {
-              navigation.navigate('DrawerMenu');
+              navigation.navigate('AuthenticationScreen');
             }}
           />
         </View>
