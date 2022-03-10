@@ -21,6 +21,7 @@ import Logo from "../components/LogoSvg";
 
 import Colors from "../constants/Colors";
 import SinglePost from "../src/screens/SinglePost";
+import SinglePdfView from "../src/screens/SinglePdfView";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -138,6 +139,7 @@ const MainNavigator = () => {
       />
       <Stack.Screen name="InstructionPage" component={InstructionPage} />
       <Stack.Screen name="DrawerMenu" component={DrawerMenu} />
+      <Stack.Screen name="SinglePdfView" component={SinglePdfView} />
     </Stack.Navigator>
   );
 };

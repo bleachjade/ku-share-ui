@@ -1,10 +1,16 @@
 import React from 'react';
-import { View, Image, ImageBackground, StyleSheet, Text } from 'react-native';
+import { View, Image, ImageBackground, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+import SinglePdfView from './SinglePdfView';
+
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
 
 const SinglePost = () => {
 
+  const navigation = useNavigation();
+  
   const singlePostImage = require("../../assets/MockupLecturesIcons/mockup-lecture-icon1.png");
 
   const authorImage = require("../../assets/icon.png");
@@ -12,7 +18,9 @@ const SinglePost = () => {
   return (
     <View style={styles.container}>
         <View style={styles.thumbnailContainer}>
-            <Image source={singlePostImage} resizeMode='cover' style={styles.singlePostImage}></Image>
+            <TouchableOpacity onPress={() => navigation.navigate(SinglePdfView)}>
+              <Image source={singlePostImage} resizeMode='cover' style={styles.singlePostImage} />
+            </TouchableOpacity>
         </View>
         <View style={styles.infoContainer}>
             
@@ -46,7 +54,6 @@ const styles = StyleSheet.create({
     height: 256,
     marginTop: 40,
     marginBottom: 20,
-    textAlign: "center",
   },
   infoContainer: {
     // flex: 1,

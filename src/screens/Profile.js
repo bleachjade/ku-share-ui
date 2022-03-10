@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 20,
     borderRadius: 100,
-    textAlign: "center",
   },
   infoContainer: {
     // flex: 1,
