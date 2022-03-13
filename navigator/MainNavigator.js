@@ -16,6 +16,7 @@ import Home from "../src/screens/Home";
 import InstructionPage from "../src/screens/InstructionPage";
 import SplashScreen from "../src/screens/SplashScreen";
 import Profile from "../src/screens/Profile";
+import UploadPage from "../src/screens/UploadPage";
 
 import Logo from "../components/LogoSvg";
 
@@ -98,6 +99,17 @@ const DrawerMenu = () => {
           headerShown: true,
           drawerIcon: () => (
             <FontAwesome name="user" size={24} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Upload Lecture"
+        component={UploadPage}
+        options={{
+          title: "Upload Lecture",
+          headerShown: true,
+          drawerIcon: () => (
+            <FontAwesome name="file" size={24} />
           ),
         }}
       />
