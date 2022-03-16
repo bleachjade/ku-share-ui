@@ -16,6 +16,7 @@ import InstructionPage from "../src/screens/InstructionPage";
 import SplashScreen from "../src/screens/SplashScreen";
 import AuthenticationScreen from "../src/screens/AuthenticationScreen";
 import NewLecturesScreen from "../src/screens/NewLecturesScreen";
+import TrendingLecturesScreen from "../src/screens/TrendingLecturesScreen";
 import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -46,13 +47,14 @@ const defaultScreenOptions = {
   headerTintColor: "red",
 };
 
-const lectureRegistrationScreens = (props) => {
+const LectureRegistrationScreens = (props) => {
   return (
     <LectureRegistrationStack.Navigator
       initialRouteName="NewLecturesScreen"
       screenOptions={{ ...defaultScreenOptions }}
     >
       <Stack.Screen name="NewLecturesScreen" component={NewLecturesScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="TrendingLecturesScreen" component={TrendingLecturesScreen} options={{headerShown: false}}/>
     </LectureRegistrationStack.Navigator>
   );
 };
@@ -108,9 +110,20 @@ const DrawerMenu = () => {
       />
       <Stack.Screen
         name="LinkToLectureRegistrationScreen"
-        component={lectureRegistrationScreens}
+        component={LectureRegistrationScreens}
         options={{
           title: "New Lectures",
+          headerShown: true,
+          drawerIcon: () => (
+            <MaterialCommunityIcons name="playlist-star" size={24} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="TrendingLecturesScreen"
+        component={TrendingLecturesScreen}
+        options={{
+          title: "Trending",
           headerShown: true,
           drawerIcon: () => (
             <MaterialCommunityIcons name="playlist-star" size={24} />
