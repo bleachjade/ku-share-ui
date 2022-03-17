@@ -44,9 +44,17 @@ const Home = ({ navigation }) => {
         inputContainerStyle={styles.searchInput}
       />
       </View>
-      <ScrollView contentContainerStyle={styles.scrollContainers} horizontal={false}>
+      <ScrollView 
+        contentContainerStyle={styles.scrollContainers} 
+        horizontal={false} 
+        scrollEnabled={true} 
+        bounces={false} 
+        showsVerticalScrollIndicator={false} 
+        >
         <HomeScreenNewsTab />
         <HomeScreenLecturesTab tabTitle={"New Lectures"} />
+        <HomeScreenLecturesTab tabTitle={"Trending Lectures"} />
+        <HomeScreenLecturesTab tabTitle={"Trending Lectures"} />
         <HomeScreenLecturesTab tabTitle={"Trending Lectures"} />
       </ScrollView>
     </View>

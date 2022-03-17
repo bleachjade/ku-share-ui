@@ -1,0 +1,3 @@
+export const ADD_NEW_LECTURE = 'ADD_NEW_LECTURE';
+export const REMOVE_LECTURE = "REMOVE_LECTURE";
+export const SET_REGIS = "SET_REGIS";

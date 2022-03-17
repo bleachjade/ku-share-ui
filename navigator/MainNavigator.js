@@ -8,6 +8,7 @@ import {
   MaterialIcons,
   Entypo,
   MaterialCommunityIcons,
+  FontAwesome
 } from "@expo/vector-icons";
 import { StyleSheet, Image, View } from "react-native";
 
@@ -21,10 +22,14 @@ import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import * as authActions from "../store/actions/auth";
+import Profile from "../src/screens/Profile";
+import UploadPage from "../src/screens/UploadPage";
 
 import Logo from "../components/LogoSvg";
 
 import Colors from "../constants/Colors";
+import SinglePost from "../src/screens/SinglePost";
+import SinglePdfView from "../src/screens/SinglePdfView";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -139,6 +144,39 @@ const DrawerMenu = () => {
           ),
         }}
       />
+      <Stack.Screen
+        name="SinglePostMock"
+        component={SinglePost}
+        options={{
+          title: "SinglePostMock",
+          headerShown: true,
+          drawerIcon: () => (
+            <FontAwesome name="user" size={24} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Upload Lecture"
+        component={UploadPage}
+        options={{
+          title: "Upload Lecture",
+          headerShown: true,
+          drawerIcon: () => (
+            <FontAwesome name="file" size={24} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: "Profile",
+          headerShown: true,
+          drawerIcon: () => (
+            <FontAwesome name="user" size={24} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 };
@@ -171,6 +209,7 @@ const MainNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="DrawerMenu" component={DrawerMenu} />
+      <Stack.Screen name="SinglePdfView" component={SinglePdfView} />
     </Stack.Navigator>
   );
 };

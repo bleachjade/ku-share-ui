@@ -1,22 +1,32 @@
 class Lecture {
     constructor(
         userId,
-        previewImage,
         title,
-        dateAdded,
-        size,
+        author,
+        description,
         subject,
         section,
-        createdBy,
+        professor,
+        numberOfPages,
+        thumbnail,
+        filePath,
+        slug,
+        createdAt,
+        updatedAt
     ) {
         this.userId = userId;
-        this.previewImage = previewImage;
         this.title = title;
-        this.dateAdded = dateAdded;
-        this.size = size;
+        this.author = author;
+        this.description = description;
         this.subject = subject;
         this.section = section;
-        this.createdBy = createdBy;
+        this.professor = professor;
+        this.numberOfPages = numberOfPages;
+        this.thumbnail = thumbnail;
+        this.filePath = filePath;
+        this.slug = slug;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 }
 

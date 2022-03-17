@@ -5,6 +5,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  Dimensions 
 } from "react-native";
 import React from "react";
 import { NavigationActions } from 'react-navigation'
@@ -25,7 +26,7 @@ const HomeScreenLecturesTab = (props) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.tabTitle}>
+      <View style={styles.tabTitleContainer}>
         <Text style={styles.descriptionText}>{tabTitle}</Text>
         <View style={styles.tabIcon}>
           <MyHeaderIcon
@@ -37,6 +38,10 @@ const HomeScreenLecturesTab = (props) => {
         </View>
       </View>
         <ScrollView contentContainerStyle={styles.lectureContainers} horizontal={true}>
+          <HomeScreenLecturesItem />
+          <HomeScreenLecturesItem />
+          <HomeScreenLecturesItem />
+          <HomeScreenLecturesItem />
           <HomeScreenLecturesItem />
           <HomeScreenLecturesItem />
           <HomeScreenLecturesItem />
@@ -57,25 +62,23 @@ const styles = StyleSheet.create({
     paddingRight: 0,
   },
   lectureContainers: {
-    width: 387,
-    flexDirection: "row",
-    alignItems: "flex-start",
+    // width: 387,
+    // flexDirection: "row",
+    // alignItems: "flex-start",
   },
   descriptionText: {
     fontFamily: "Prompt",
     fontSize: 15,
     fontWeight: "normal",
     color: "black",
+  },
+  tabTitleContainer: {
+    flex: 1,    
     marginBottom: 10,
-  },
-  tabTitle: {
+    width: Dimensions.get('window').width - 35,
     flexDirection: "row",
-    width: 387,
-    flex: 1,
     justifyContent: "space-between",
-  },
-  tabIcon: {
-    paddingRight: 15,
+    alignItems: "center",
   },
 });
 
