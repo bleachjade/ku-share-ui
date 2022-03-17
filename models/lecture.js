@@ -12,7 +12,8 @@ class Lecture {
         filePath,
         slug,
         createdAt,
-        updatedAt
+        updatedAt,
+        id
     ) {
         this.userId = userId;
         this.title = title;
@@ -27,6 +28,7 @@ class Lecture {
         this.slug = slug;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.id = id;
     }
 }
 

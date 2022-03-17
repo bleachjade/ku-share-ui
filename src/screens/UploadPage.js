@@ -19,6 +19,7 @@ import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
 
 const UploadPage = () => {
+    // dont forget createdAt and updatedAt
     const [ doc, setDoc ] = useState();
     const [title, onChangeTitle] = useState("");
     const [description, onChangeDescription] = useState("");
