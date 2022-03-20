@@ -60,15 +60,22 @@ const UploadPage = (props) => {
         const url = "http://localhost:3001/lecture/upload";
         const fileUri = doc.uri;
         const formData = new FormData();
-        var input = {
+        // var input = {
+        //     title: title,
+        //     description: description,
+        //     subject: subject,
+        //     // file: doc
+        // 
+        let userInput = JSON.stringify({
             title: title,
             description: description,
             subject: subject,
-            file: doc
-        }
-        setInputFormData(input);
+            // file: doc
+        })
+        // setInputFormData(input);
         // console.log(doc);
-        formData.append('document', inputFormData);
+        formData.append('document', userInput);
+        formData.append('thumbnail', doc);
         // formData.append('document', inputFormData);
         const options = {
             method: 'POST',
