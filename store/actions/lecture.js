@@ -34,36 +34,37 @@ export const fetchLectures = () => {
             resData[key].filePath,
             resData[key].slug,
             resData[key].createdAt, //be careful here
-            resData[key].updatedAt  //be careful here
+            resData[key].updatedAt //be careful here
           )
         );
       }
 
-    //   for (const key in resData) {
-    //     loadedLectures.push(
-    //       new Lecture(
-    //         resData[key].userId,
-    //         resData[key].title,
-    //         resData[key].author,
-    //         resData[key].description,
-    //         resData[key].subject,
-    //         resData[key].section,
-    //         resData[key].professor,
-    //         resData[key].numberOfPages,
-    //         resData[key].thumbnail,
-    //         resData[key].filePath,
-    //         resData[key].slug,
-    //         resData[key].createdAt,
-    //         resData[key].updatedAt
-    //       )
-    //     );
-    //   }
+      //   for (const key in resData) {
+      //     loadedLectures.push(
+      //       new Lecture(
+      //         resData[key].userId,
+      //         resData[key].title,
+      //         resData[key].author,
+      //         resData[key].description,
+      //         resData[key].subject,
+      //         resData[key].section,
+      //         resData[key].professor,
+      //         resData[key].numberOfPages,
+      //         resData[key].thumbnail,
+      //         resData[key].filePath,
+      //         resData[key].slug,
+      //         resData[key].createdAt,
+      //         resData[key].updatedAt
+      //       )
+      //     );
+      //   }
 
       console.log(loadedLectures);
 
       dispatch({
         type: SET_LECTURES,
-        registration: loadedLectures.filter((regis) => { //filter the ones user uploaded
+        registration: loadedLectures.filter((regis) => {
+          //filter the ones user uploaded
           return regis.userId === myUserId;
         }),
       });
@@ -73,34 +74,48 @@ export const fetchLectures = () => {
   };
 };
 
+// export const addNewLecture = (lecture) => {
+//     return async (dispatch, getState) => {
+//       const myToken = getState().auth.token;
+//       const myUserId = getState().auth.userId;
+//       const newInputValues = {userId: myUserId, ...lecture.inputValues};
+
+//       const response = await fetch(
+//         `http://localhost:3001/lecture/upload?auth=${myToken}`,
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify(newInputValues),
+//         }
+//       );
+
+//       if (!response.ok) {
+//         throw new Error("Please wait a little bit then submit again...");
+//       }
+
+//       const resData = await response.json();
+
+//       dispatch({
+//         type: ADD_NEW_LECTURE,
+//         lecture: lecture.inputValues,
+//         id: resData.name, //be careful here
+//         userId: myUserId
+//       });
+//     };
+//   };
+
 export const addNewLecture = (lecture) => {
-    return async (dispatch, getState) => {
-      const myToken = getState().auth.token;
-      const myUserId = getState().auth.userId;
-      const newInputValues = {userId: myUserId, ...lecture.inputValues};
-  
-      const response = await fetch(
-        `http://localhost:3001/lecture/upload?auth=${myToken}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newInputValues),
-        }
-      );
-  
-      if (!response.ok) {
-        throw new Error("Please wait a little bit then submit again...");
-      }
-  
-      const resData = await response.json();
-  
-      dispatch({
-        type: ADD_NEW_LECTURE,
-        lecture: lecture.inputValues,
-        id: resData.name, //be careful here
-        userId: myUserId
-      });
-    };
+  return async (dispatch) => {
+    console.log('from addNewLecture action')
+    console.log(lecture);
+
+    dispatch({
+      type: ADD_NEW_LECTURE,
+      lecture: lecture,
+      id: "123", //be careful here
+      userId: "myUserId",
+    });
   };
+};
