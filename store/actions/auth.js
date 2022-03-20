@@ -50,7 +50,7 @@ const saveDataToStorage = (
   
   export const signup = (email, password) => {
     return async (dispatch) => {
-      const response = await fetch("http://localhost:3001/user/signup", {
+      const response = await fetch("https://ku-share-backend.herokuapp.com/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +115,7 @@ const saveDataToStorage = (
   
   export const login = (email, password) => {
     return async (dispatch) => {
-      const response = await fetch("http://localhost:3001/user/signin", {
+      const response = await fetch("https://ku-share-backend.herokuapp.com/user/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
