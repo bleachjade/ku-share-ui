@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
+
+import * as lectureActions from '../../store/actions/lecture'
 
 import {
     Ionicons,
@@ -18,7 +21,9 @@ import {
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
 
-const UploadPage = () => {
+const UploadPage = (props) => {
+    const dispatch = useDispatch();
+
     // dont forget createdAt and updatedAt
     const [ doc, setDoc ] = useState();
     const [title, onChangeTitle] = useState("");
@@ -26,10 +31,10 @@ const UploadPage = () => {
     const [subject, onChangeSubject] = useState("");
     const [inputFormData, setInputFormData] = useState();
 
-    useEffect(() => {
-        console.log(inputFormData);
-        console.log('from inputFormData');
-    }, [inputFormData])
+    // useEffect(() => {
+    //     console.log(inputFormData);
+    //     console.log('from inputFormData');
+    // }, [inputFormData])
 
     const pickDocument = async () => {
         let result = await DocumentPicker.getDocumentAsync({ type: "*/*", copyToCacheDirectory: true }).then(response => {
@@ -48,7 +53,7 @@ const UploadPage = () => {
             } 
           });
         // console.log(result);
-        console.log("Doc: " + doc.uri);
+        // console.log("Doc: " + doc.uri);
     }
 
     const postDocument = () => {
@@ -73,7 +78,8 @@ const UploadPage = () => {
               'Content-Type': 'multipart/form-data',
             },
         };
-        console.log(formData);
+        dispatch(lectureActions.addNewLecture(formData));
+        // console.log(formData);
 
         fetch(url, options).catch((error) => console.log(error));
     }
