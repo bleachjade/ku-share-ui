@@ -37,7 +37,7 @@ const UploadPage = (props) => {
     // }, [inputFormData])
 
     const pickDocument = async () => {
-        let result = await DocumentPicker.getDocumentAsync({ type: "*/*", copyToCacheDirectory: true }).then(response => {
+        let result = await DocumentPicker.getDocumentAsync({ type: "application/pdf", copyToCacheDirectory: true }).then(response => {
             if (response.type == 'success') {          
               let { name, size, uri } = response;
               let nameParts = name.split('.');
@@ -75,7 +75,7 @@ const UploadPage = (props) => {
         // setInputFormData(input);
         // console.log(doc);
         formData.append('document', userInput);
-        formData.append('thumbnail', doc);
+        formData.append('pdf', doc);
         // formData.append('document', inputFormData);
         const options = {
             method: 'POST',
