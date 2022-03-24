@@ -33,6 +33,7 @@
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^2.1.1",
     "react-native-header-search-bar": "^0.1.10",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-material-ripple": "^0.9.1",
     "react-native-pager-view": "5.4.9",
     "react-native-pdf-thumbnail": "^1.0.2",
