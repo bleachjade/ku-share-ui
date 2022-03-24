@@ -15,7 +15,7 @@ const HomeScreenLecturesItem = () => {
         <LinearGradient 
         colors={['rgba(0,0,0,0) 0%', 'rgba(0,0,0,0.5) 100%']}
         style={styles.lectureTitleBackground}>
-          <Text style={styles.lectureTitle} numberOfLines={1} ellipsizeMode='end'>Lecture Description</Text>
+          <Text style={styles.lectureTitle} numberOfLines={1} ellipsizeMode='tail'>Lecture Description</Text>
         </LinearGradient>
       </View>
     </Card>
