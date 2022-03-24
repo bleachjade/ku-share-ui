@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
@@ -24,19 +24,26 @@ import Fonts from '../../constants/Fonts';
 
 const UploadPage = (props) => {
     const dispatch = useDispatch();
+    const offlineUserData = useSelector((state) => state.auth);
+    const previouslyRegisteredLectures = useSelector(
+    (state) => state.registration.prevLectures
+  );
 
-    // dont forget createdAt and updatedAt
+  useEffect(() => {console.log(offlineUserData)}, [])
+
+    // dont forget createdAt and updatedAt, id
     const [ doc, setDoc ] = useState();
     const [ thumbnail, setThumbnail ] = useState();
+
     const [title, onChangeTitle] = useState("");
     const [description, onChangeDescription] = useState("");
     const [subject, onChangeSubject] = useState("");
+    const [author, setAuthor] = useState("");
+    const [section, setSection] = useState("");
+    const [slug, setSlug] = useState("");
+
     const [inputFormData, setInputFormData] = useState();
 
-    // useEffect(() => {
-    //     console.log(inputFormData);
-    //     console.log('from inputFormData');
-    // }, [inputFormData])
 
     const pickDocument = async () => {
         let result = await DocumentPicker.getDocumentAsync({ type: "application/pdf", copyToCacheDirectory: true }).then(response => {
@@ -54,8 +61,7 @@ const UploadPage = (props) => {
               setDoc(fileToUpload);
             } 
           });
-        // console.log(result);
-        // console.log("Doc: " + doc.uri);
+
     }
 
     const pickThumbnail = async () => {
@@ -80,23 +86,21 @@ const UploadPage = (props) => {
         const url = "http://localhost:3001/lecture/upload";
         const fileUri = doc.uri;
         const formData = new FormData();
-        // var input = {
-        //     title: title,
-        //     description: description,
-        //     subject: subject,
-        //     // file: doc
-        // 
+
         let userInput = JSON.stringify({
+            userId: offlineUserData.userId,
             title: title,
+            author: author,
             description: description,
             subject: subject,
-            // file: doc
+            section: section,
+            slug: slug,
         })
-        // setInputFormData(input);
-        // console.log(doc);
-        formData.append('document', userInput);
+
+        formData.append('userInput', userInput);
+        formData.append('thumbnail', thumbnail);
         formData.append('pdf', doc);
-        // formData.append('document', inputFormData);
+
         const options = {
             method: 'POST',
             body: formData,
@@ -109,6 +113,7 @@ const UploadPage = (props) => {
         // console.log(formData);
 
         fetch(url, options).catch((error) => console.log(error));
+        console.log(previouslyRegisteredLectures)
     }
 
     const updateThumbnailButton = () => {

@@ -1,16 +1,16 @@
 class Lecture {
     constructor(
-        userId,
-        title,
-        author,
-        description,
-        subject,
-        section,
+        userId, //front (getState() in action)
+        title, //front
+        author, //front
+        description, //front
+        subject, //front
+        section, //front
         professor,
         numberOfPages,
-        thumbnail,
-        filePath,
-        slug,
+        thumbnail, //back
+        filePath, //back
+        slug, //front
         createdAt,
         updatedAt,
         id

@@ -18,10 +18,12 @@ import Home from "./src/screens/Home";
 import MainNavigator from "./navigator/MainNavigator";
 
 import authReducer from "./store/reducers/auth";
+import lectureReducer from "./store/reducers/lecture"
 
 const Stack = createStackNavigator();
 
 const rootReducer = combineReducers({
+  registration: lectureReducer,
   auth: authReducer,
 });
 
