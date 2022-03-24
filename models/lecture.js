@@ -6,8 +6,6 @@ class Lecture {
         description, //front
         subject, //front
         section, //front
-        professor,
-        numberOfPages,
         thumbnail, //back
         filePath, //back
         slug, //front
@@ -21,8 +19,6 @@ class Lecture {
         this.description = description;
         this.subject = subject;
         this.section = section;
-        this.professor = professor;
-        this.numberOfPages = numberOfPages;
         this.thumbnail = thumbnail;
         this.filePath = filePath;
         this.slug = slug;

@@ -28,36 +28,15 @@ export const fetchLectures = () => {
             resData[key].description,
             resData[key].subject,
             resData[key].section,
-            resData[key].professor,
-            resData[key].numberOfPages,
             resData[key].thumbnail,
             resData[key].filePath,
             resData[key].slug,
             resData[key].createdAt, //be careful here
-            resData[key].updatedAt //be careful here
+            resData[key].updatedAt, //be careful here
+            resData[key]._id
           )
         );
       }
-
-      //   for (const key in resData) {
-      //     loadedLectures.push(
-      //       new Lecture(
-      //         resData[key].userId,
-      //         resData[key].title,
-      //         resData[key].author,
-      //         resData[key].description,
-      //         resData[key].subject,
-      //         resData[key].section,
-      //         resData[key].professor,
-      //         resData[key].numberOfPages,
-      //         resData[key].thumbnail,
-      //         resData[key].filePath,
-      //         resData[key].slug,
-      //         resData[key].createdAt,
-      //         resData[key].updatedAt
-      //       )
-      //     );
-      //   }
 
       console.log(loadedLectures);
 
@@ -106,16 +85,16 @@ export const fetchLectures = () => {
 //     };
 //   };
 
-export const addNewLecture = (lecture) => {
-  return async (dispatch) => {
-    console.log('from addNewLecture action')
-    console.log(lecture);
+// export const addNewLecture = (lecture) => {
+//   return async (dispatch) => {
+//     console.log('from addNewLecture action')
+//     console.log(lecture);
 
-    dispatch({
-      type: ADD_NEW_LECTURE,
-      lecture: lecture,
-      id: "123", //be careful here
-      userId: "myUserId",
-    });
-  };
-};
+//     dispatch({
+//       type: ADD_NEW_LECTURE,
+//       lecture: lecture,
+//       id: "123", //be careful here
+//       userId: "myUserId",
+//     });
+//   };
+// };

@@ -29,7 +29,7 @@ const UploadPage = (props) => {
     (state) => state.registration.prevLectures
   );
 
-  useEffect(() => {console.log(offlineUserData)}, [])
+//   useEffect(() => {console.log(offlineUserData)}, [])
 
     // dont forget createdAt and updatedAt, id
     const [ doc, setDoc ] = useState();
@@ -38,9 +38,9 @@ const UploadPage = (props) => {
     const [title, onChangeTitle] = useState("");
     const [description, onChangeDescription] = useState("");
     const [subject, onChangeSubject] = useState("");
-    const [author, setAuthor] = useState("");
-    const [section, setSection] = useState("");
-    const [slug, setSlug] = useState("");
+    const [author, setAuthor] = useState("author");
+    const [section, setSection] = useState("section");
+    const [slug, setSlug] = useState("slug");
 
     const [inputFormData, setInputFormData] = useState();
 
@@ -97,6 +97,8 @@ const UploadPage = (props) => {
             slug: slug,
         })
 
+        // console.log(userInput);
+
         formData.append('userInput', userInput);
         formData.append('thumbnail', thumbnail);
         formData.append('pdf', doc);
@@ -109,7 +111,7 @@ const UploadPage = (props) => {
               'Content-Type': 'multipart/form-data',
             },
         };
-        dispatch(lectureActions.addNewLecture(formData));
+        // dispatch(lectureActions.addNewLecture(formData));
         // console.log(formData);
 
         fetch(url, options).catch((error) => console.log(error));
