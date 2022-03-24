@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
@@ -26,6 +27,7 @@ const UploadPage = (props) => {
 
     // dont forget createdAt and updatedAt
     const [ doc, setDoc ] = useState();
+    const [ thumbnail, setThumbnail ] = useState();
     const [title, onChangeTitle] = useState("");
     const [description, onChangeDescription] = useState("");
     const [subject, onChangeSubject] = useState("");
@@ -54,6 +56,24 @@ const UploadPage = (props) => {
           });
         // console.log(result);
         // console.log("Doc: " + doc.uri);
+    }
+
+    const pickThumbnail = async () => {
+        let result = await DocumentPicker.getDocumentAsync({ type: "image/*", copyToCacheDirectory: true }).then(response => {
+            if (response.type == 'success') {          
+              let { name, size, uri } = response;
+              let nameParts = name.split('.');
+              let fileType = nameParts[nameParts.length - 1];
+              var fileToUpload = {
+                name: name,
+                size: size,
+                uri: uri,
+                type: "application/" + fileType
+              };
+              console.log(fileToUpload, '...thumbnail')
+              setThumbnail(fileToUpload);
+            } 
+          });
     }
 
     const postDocument = () => {
@@ -91,59 +111,83 @@ const UploadPage = (props) => {
         fetch(url, options).catch((error) => console.log(error));
     }
 
-    return (        
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={styles.container}
-            >
-            <View style={styles.uploadContainer}>
-                <Button 
-                    title="Upload .PDF lecture" 
-                    onPress={pickDocument} 
-                    icon={
-                        <FontAwesome5
-                        name="cloud-upload-alt"
-                        size={75}
-                        color={Colors.primaryColor}
-                        />
-                    }
-                    iconPosition='top'
-                    buttonStyle={styles.uploadButton}
-                    titleStyle={styles.uploadText}
+    const updateThumbnailButton = () => {
+        if (thumbnail) {
+            return <Button 
+                    title={thumbnail.name} 
+                    onPress={pickThumbnail} 
+                    buttonStyle={styles.uploadThumbnailButton}
+                    titleStyle={styles.uploadTThumbnailext}
                     />
-                <Text style={styles.fileTitleText}>{doc ? 'File name: ' + doc.name : ''}</Text>
-            </View>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={styles.formContainer}>
+        }
+        return <Button 
+                title="Upload Lecture Thumbnail" 
+                onPress={pickThumbnail} 
+                buttonStyle={styles.uploadThumbnailButton}
+                titleStyle={styles.uploadTThumbnailext}
+                />
+    }
 
-                    <Text style={styles.label}>Lecture's Title</Text>
-                    <TextInput value={title} onChangeText={onChangeTitle} style={styles.input} />
-                    <Text style={styles.label}>Lecture's Description</Text>
-                    <TextInput value={description} onChangeText={onChangeDescription} style={styles.input} />
-                    <Text style={styles.label}>Lecture's Subject</Text>
-                    <TextInput value={subject} onChangeText={onChangeSubject} style={styles.input} />
+    return (       
+            // <KeyboardAvoidingView
+            //     behavior={Platform.OS === "ios" ? "padding" : "height"}
+            //     style={styles.container}
+            //     >
+            <KeyboardAwareScrollView style={styles.container}>
+                <View style={styles.innerContainer}>
+                    <View style={styles.uploadContainer}>
+                        <Button 
+                            title="Upload .PDF lecture" 
+                            onPress={pickDocument} 
+                            icon={
+                                <FontAwesome5
+                                name="cloud-upload-alt"
+                                size={75}
+                                color={Colors.primaryColor}
+                                />
+                            }
+                            iconPosition='top'
+                            buttonStyle={styles.uploadButton}
+                            titleStyle={styles.uploadText}
+                            />
+                        <Text style={styles.fileTitleText}>{doc ? 'File name: ' + doc.name : ''}</Text>
+                    </View>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <View style={styles.formContainer}>
 
-                    <Button 
-                        title="Upload" 
-                        onPress={postDocument}
-                        buttonStyle={styles.submitButton}
-                        titleStyle={styles.submitText}
-                        />
+                            { updateThumbnailButton() }
+                            <Text style={styles.label}>Lecture's Title</Text>
+                            <TextInput value={title} onChangeText={onChangeTitle} style={styles.input} />
+                            <Text style={styles.label}>Lecture's Description</Text>
+                            <TextInput value={description} onChangeText={onChangeDescription} style={styles.input} />
+                            <Text style={styles.label}>Lecture's Subject</Text>
+                            <TextInput value={subject} onChangeText={onChangeSubject} style={styles.input} />
+
+                            <Button 
+                                title="Upload" 
+                                onPress={postDocument}
+                                buttonStyle={styles.submitButton}
+                                titleStyle={styles.submitText}
+                                />
+                        </View>
+                    </TouchableWithoutFeedback>
                 </View>
-            </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+            </KeyboardAwareScrollView>
     )
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        backgroundColor: Colors.primaryColorOpacityDown,
+        backgroundColor: '#fff',
         fontFamily: Fonts.primaryFont,
     },
-    uploadContainer: {
+    innerContainer: {
         flex: 1,
-        padding: 0,
+        justifyContent: 'space-around'
+    },  
+    uploadContainer: {
+        backgroundColor: Colors.primaryColorOpacityDown
     },
     uploadButton: {
         paddingTop: 80,
@@ -157,22 +201,32 @@ const styles = StyleSheet.create({
         marginTop: 15,
         color: Colors.primaryColor
     },
+    uploadThumbnailButton: {
+        backgroundColor: Colors.primaryColor,
+        borderRadius: 10,
+        marginBottom: 25,
+        padding: 18
+    },
+    uploadTThumbnailext: {
+        fontSize: 14
+    },
     fileTitleText: {
-        // position: 'absolute',
-        // left: 0,
-        // right: 0,
+        position: 'absolute',
+        left: 0,
+        right: 0,
         textAlign: 'center',
+        top: '70%',
         // top: '60%',
-        // bottom: 100,
-        marginTop: -55,
+        // bottom: 0,
+        // marginTop: -65,
         color: Colors.primaryColor,
         fontWeight: '700'
     },
     formContainer: {
         backgroundColor: '#fff',
-        paddingTop: 35,
+        paddingTop: 30,
         paddingHorizontal: 25,
-        paddingBottom: 40,
+        paddingBottom: 35,
         margin: 0,
         marginTop: -20,
         borderTopLeftRadius: 25,
