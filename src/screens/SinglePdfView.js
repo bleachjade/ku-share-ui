@@ -7,9 +7,11 @@ import {
 } from "@expo/vector-icons";
 
 
-const SinglePdfView = () => {
+const SinglePdfView = (props) => {
 
   const navigation = useNavigation();
+  let receivedUrl = { uri : props.route.params.receivedUrl };
+  console.log(receivedUrl);
 
   return (
     <View style={styles.container}>
@@ -17,7 +19,7 @@ const SinglePdfView = () => {
           <Text style={styles.goBackButton} onPress={() => navigation.goBack()}><Entypo name="chevron-left" size={36} /></Text>
         </View>
         <WebView 
-          source={{ uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf' }} 
+          source={receivedUrl ? receivedUrl : { uri: 'http://samples.leanpub.com/thereactnativebook-sample.pdf' }} 
           automaticallyAdjustContentInsets={false}
           style={styles.pdfViewer}
           // onFileDownload={({ nativeEvent: { downloadUrl } }) => {

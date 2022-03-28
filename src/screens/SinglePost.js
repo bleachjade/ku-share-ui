@@ -1,6 +1,5 @@
 import React, { useLayoutEffect } from 'react';
 import { View, Image, ImageBackground, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from "react-redux";
 
 import SinglePdfView from './SinglePdfView';
@@ -8,31 +7,43 @@ import SinglePdfView from './SinglePdfView';
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
 
-const SinglePost = () => {
+const SinglePost = (props) => {
+  const allLectures = useSelector(
+    (state) => state.registration.prevLectures
+  );
+  const authUserProfile = useSelector((state) => state.auth.userProfile);
 
-  const navigation = useNavigation();
-  
-  const singlePostImage = require("../../assets/MockupLecturesIcons/mockup-lecture-icon1.png");
 
-  const authorImage = require("../../assets/icon.png");
+
+  let selectedId = props.route.params.itemId;
+  let copiedItem = allLectures.map((item) => item);
+  let filteredItem = copiedItem.find((item) => item.id == selectedId);
+    
+  let singlePostImage = { uri : filteredItem.thumbnail.url };
+
+  let authorImage = require("../../assets/icon.png");
 
   return (
     <View style={styles.container}>
         <View style={styles.thumbnailContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate(SinglePdfView)}>
+            <TouchableOpacity onPress={() => {
+              props.navigation.navigate("SinglePdfView", {
+                receivedUrl: filteredItem.filePath,
+              });
+            }}>
               <Image source={singlePostImage} resizeMode='cover' style={styles.singlePostImage} />
             </TouchableOpacity>
         </View>
         <View style={styles.infoContainer}>
             
-            <Text style={styles.headerText}>Lecture’s Name: Mathematics II for SKE student</Text>
-            <Text style={styles.secondaryText}>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hendrerit nibh ultrices est congue eget mus.</Text>
-            <Text style={styles.secondaryText}>Subject: Mathematics II</Text>
+            <Text style={styles.headerText}>Lecture’s Name: { filteredItem.title }</Text>
+            <Text style={styles.secondaryText}>Description: { filteredItem.description }</Text>
+            <Text style={styles.secondaryText}>Subject: { filteredItem.subject }</Text>
 
             <View style={styles.authorBoxContainer}>
                 <View style={styles.authorBoxWrapper}>
                     <Image source={authorImage} resizeMode='cover' style={styles.authorImage}></Image>
-                    <Text style={styles.authorName}>Jadenttp</Text>  
+                    <Text style={styles.authorName}> Email: { authUserProfile.email }</Text>  
                 </View>  
             </View>
         </View>
@@ -81,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   authorBoxWrapper: {
-    width: 250,
+    width: 400,
     maxHeight: 60,
     backgroundColor: Colors.primaryColor,
     color: '#fff',
