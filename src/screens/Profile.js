@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Image, ImageBackground, StyleSheet, Text, ScrollView, SafeAreaView } from 'react-native';
-import Fonts from '../../constants/Fonts';
+import { useSelector } from "react-redux";
 
+import Fonts from '../../constants/Fonts';
 import HomeScreenLecturesTab from "../../components/HomeScreenLecturesTab";
 import HomeScreenLecturesItem from "../../components/HomeScreenLecturesItem";
 
 const Profile = () => {
+  const authUserProfile = useSelector((state) => state.auth.userProfile);
   const backgroundImage = require('../../assets/profile_bg.png');
 
   const profileImage = require('../../assets/icon.png');
@@ -16,8 +18,8 @@ const Profile = () => {
           <Image source={profileImage} resizeMode='cover' style={styles.profileImage}></Image>
           <View style={styles.infoContainer}>
             <Text style={styles.headerText}>Basic Information</Text>
-            <Text style={styles.secondaryText}>Diana Yeun</Text>
-            <Text style={styles.secondaryText}>diana.yeu@ku.th</Text>
+            {/* <Text style={styles.secondaryText}>Diana Yeun</Text> */}
+            <Text style={styles.secondaryText}>Email: {authUserProfile.email}</Text>
           </View>
           <ScrollView 
             contentContainerStyle={styles.scrollContainers} 

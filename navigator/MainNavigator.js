@@ -17,7 +17,7 @@ import InstructionPage from "../src/screens/InstructionPage";
 import SplashScreen from "../src/screens/SplashScreen";
 import AuthenticationScreen from "../src/screens/AuthenticationScreen";
 import NewLecturesScreen from "../src/screens/NewLecturesScreen";
-import TrendingLecturesScreen from "../src/screens/TrendingLecturesScreen";
+import AllLecturesScreen from "../src/screens/AllLecturesScreen";
 import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -49,7 +49,7 @@ const defaultScreenOptions = {
   headerStyle: {
     backgroundColor: Colors.primaryColor,
   },
-  headerTintColor: "red",
+  headerTintColor: "white",
 };
 
 const LectureRegistrationScreens = (props) => {
@@ -59,7 +59,7 @@ const LectureRegistrationScreens = (props) => {
       screenOptions={{ ...defaultScreenOptions }}
     >
       <Stack.Screen name="NewLecturesScreen" component={NewLecturesScreen} options={{headerShown: false}}/>
-      <Stack.Screen name="TrendingLecturesScreen" component={TrendingLecturesScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="AllLecturesScreen" component={AllLecturesScreen} options={{headerShown: false}}/>
     </LectureRegistrationStack.Navigator>
   );
 };
@@ -93,7 +93,7 @@ const DrawerMenu = () => {
           drawerIcon: () => <MaterialIcons name="explore" size={24} />,
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Publish"
         component={Home}
         options={{
@@ -101,8 +101,8 @@ const DrawerMenu = () => {
           headerShown: true,
           drawerIcon: () => <Entypo name="circle-with-plus" size={24} />,
         }}
-      />
-      <Stack.Screen
+      /> */}
+      {/* <Stack.Screen
         name="Your Saved"
         component={Home}
         options={{
@@ -112,7 +112,7 @@ const DrawerMenu = () => {
             <MaterialCommunityIcons name="playlist-star" size={24} />
           ),
         }}
-      />
+      /> */}
       <Stack.Screen
         name="LinkToLectureRegistrationScreen"
         component={LectureRegistrationScreens}
@@ -125,45 +125,34 @@ const DrawerMenu = () => {
         }}
       />
       <Stack.Screen
-        name="TrendingLecturesScreen"
-        component={TrendingLecturesScreen}
+        name="AllLecturesScreen"
+        component={AllLecturesScreen}
         options={{
-          title: "Trending",
+          title: "All Lectures",
           headerShown: true,
           drawerIcon: () => (
             <MaterialCommunityIcons name="playlist-star" size={24} />
           ),
         }}
       />
-      <Stack.Screen
-        name="Logout"
-        component={LogoutButton}
-        options={{
-          drawerIcon: () => (
-            <MaterialCommunityIcons name="playlist-star" size={24} />
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="SinglePostMock"
+      {/* <Stack.Screen
+        name="SinglePost"
         component={SinglePost}
         options={{
-          title: "SinglePostMock",
+          title: "SinglePost",
           headerShown: true,
           drawerIcon: () => (
             <FontAwesome name="user" size={24} />
           ),
         }}
-      />
+      /> */}
       <Stack.Screen
         name="Upload Lecture"
         component={UploadPage}
         options={{
           title: "Upload Lecture",
           headerShown: true,
-          drawerIcon: () => (
-            <FontAwesome name="file" size={24} />
-          ),
+          drawerIcon: () => <Entypo name="circle-with-plus" size={24} />,
         }}
       />
       <Stack.Screen
@@ -174,6 +163,15 @@ const DrawerMenu = () => {
           headerShown: true,
           drawerIcon: () => (
             <FontAwesome name="user" size={24} />
+          ),
+        }}
+      />
+            <Stack.Screen
+        name="Logout"
+        component={LogoutButton}
+        options={{
+          drawerIcon: () => (
+            <MaterialCommunityIcons name="key-variant" size={24} />
           ),
         }}
       />
@@ -210,6 +208,15 @@ const MainNavigator = () => {
       />
       <Stack.Screen name="DrawerMenu" component={DrawerMenu} />
       <Stack.Screen name="SinglePdfView" component={SinglePdfView} />
+      <Stack.Screen
+        name="SinglePost"
+        component={SinglePost}
+        options={{
+          headerShown: true,
+          headerBackTitle: 'Back',
+          headerTitle: 'PDF Details'
+        }}
+      />
     </Stack.Navigator>
   );
 };

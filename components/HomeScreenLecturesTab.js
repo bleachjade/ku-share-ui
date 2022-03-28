@@ -22,6 +22,7 @@ const HomeScreenLecturesTab = (props) => {
   
   const changeScreenHandler = () => {
     const screenRoute = tabTitle.split(' ').join('') + "Screen";
+    console.log(screenRoute);
     navigation.navigate("LinkToLectureRegistrationScreen", {screen: screenRoute});
   };
   return (

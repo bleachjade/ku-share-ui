@@ -7,45 +7,57 @@ export const fetchLectures = () => {
   return async (dispatch, getState) => {
     try {
       const myUserId = getState().auth.userId;
+      
       const response = await fetch(
         `http://localhost:3001/lecture/fetch?userId=${myUserId}`
       );
+      // const response = await fetch(
+      //   `http://localhost:3001/lecture-local/fetch`
+      // );
+      console.log('the request is sent');
 
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
 
+      
       const resData = await response.json();
-      console.log(resData);
-      const loadedLectures = [];
 
-      for (const key in resData) {
+      // console.log('resData: ')
+      // console.log(' ')
+      // console.log(resData);
+
+      let loadedLectures = [];
+
+      // console.log(resData.fetchedLectures[0]);
+
+      for (let i = 0; i < resData.fetchedLectures.length; i++){
         loadedLectures.push(
           new Lecture(
-            resData[key].userId,
-            resData[key].title,
-            resData[key].author,
-            resData[key].description,
-            resData[key].subject,
-            resData[key].section,
-            resData[key].thumbnail,
-            resData[key].filePath,
-            resData[key].slug,
-            resData[key].createdAt, //be careful here
-            resData[key].updatedAt, //be careful here
-            resData[key]._id
+            resData.fetchedLectures[i].userId,
+            resData.fetchedLectures[i].title,
+            resData.fetchedLectures[i].author,
+            resData.fetchedLectures[i].description,
+            resData.fetchedLectures[i].subject,
+            resData.fetchedLectures[i].section,
+            resData.fetchedLectures[i].thumbnail,
+            resData.fetchedLectures[i].filePath,
+            resData.fetchedLectures[i].slug,
+            resData.fetchedLectures[i].createdAt, //be careful here
+            resData.fetchedLectures[i].updatedAt, //be careful here
+            resData.fetchedLectures[i]._id
           )
         );
       }
 
-      console.log(loadedLectures);
+      // console.log('loadedLectures')
+      // console.log(' ')
+      // console.log(loadedLectures);
+      console.log('Lecture successfully fetched from backend')
 
       dispatch({
         type: SET_LECTURES,
-        registration: loadedLectures.filter((regis) => {
-          //filter the ones user uploaded
-          return regis.userId === myUserId;
-        }),
+        registration: loadedLectures,
       });
     } catch (err) {
       throw err;

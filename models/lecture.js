@@ -11,7 +11,7 @@ class Lecture {
         slug, //front
         createdAt,
         updatedAt,
-        id
+        _id
     ) {
         this.userId = userId;
         this.title = title;
@@ -24,7 +24,7 @@ class Lecture {
         this.slug = slug;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.id = id;
+        this.id = _id;
     }
 }
 

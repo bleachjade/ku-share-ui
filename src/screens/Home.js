@@ -53,9 +53,7 @@ const Home = ({ navigation }) => {
         >
         <HomeScreenNewsTab />
         <HomeScreenLecturesTab tabTitle={"New Lectures"} />
-        <HomeScreenLecturesTab tabTitle={"Trending Lectures"} />
-        <HomeScreenLecturesTab tabTitle={"Trending Lectures"} />
-        <HomeScreenLecturesTab tabTitle={"Trending Lectures"} />
+        <HomeScreenLecturesTab tabTitle={"All Lectures"} />
       </ScrollView>
     </View>
   );

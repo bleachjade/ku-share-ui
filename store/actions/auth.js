@@ -82,6 +82,7 @@ const saveDataToStorage = (
         homeAddress: resData.homeAddress,
         age: resData.age,
         profileImage: resData.profileImage,
+        email: resData.email
       };
       // console.log(userProfile);
       
@@ -143,6 +144,7 @@ const saveDataToStorage = (
         homeAddress: resData.homeAddress,
         age: resData.age,
         profileImage: resData.profileImage,
+        email: resData.email
       };
       console.log(userProfile);
       dispatch(
