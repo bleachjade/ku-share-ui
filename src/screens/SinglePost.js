@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { View, Image, ImageBackground, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 
 import SinglePdfView from './SinglePdfView';
@@ -36,9 +36,14 @@ const SinglePost = (props) => {
         </View>
         <View style={styles.infoContainer}>
             
+            <ScrollView>
             <Text style={styles.headerText}>Lecture’s Name: { filteredItem.title }</Text>
             <Text style={styles.secondaryText}>Description: { filteredItem.description }</Text>
             <Text style={styles.secondaryText}>Subject: { filteredItem.subject }</Text>
+            <Text style={styles.secondaryText}>Professor Name: { filteredItem.author }</Text>
+            <Text style={styles.secondaryText}>Section: { filteredItem.section }</Text>
+
+            
 
             <View style={styles.authorBoxContainer}>
                 <View style={styles.authorBoxWrapper}>
@@ -46,6 +51,7 @@ const SinglePost = (props) => {
                     <Text style={styles.authorName}> Email: { authUserProfile.email }</Text>  
                 </View>  
             </View>
+            </ScrollView>
         </View>
     </View>
   );

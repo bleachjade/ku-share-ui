@@ -25,9 +25,9 @@ import Fonts from '../../constants/Fonts';
 const UploadPage = (props) => {
     const dispatch = useDispatch();
     const offlineUserData = useSelector((state) => state.auth);
-    const previouslyRegisteredLectures = useSelector(
-    (state) => state.registration.prevLectures
-  );
+//     const previouslyRegisteredLectures = useSelector(
+//     (state) => state.registration.prevLectures
+//   );
 
 //   useEffect(() => {console.log(offlineUserData)}, [])
 
@@ -38,9 +38,9 @@ const UploadPage = (props) => {
     const [title, onChangeTitle] = useState("");
     const [description, onChangeDescription] = useState("");
     const [subject, onChangeSubject] = useState("");
-    const [author, setAuthor] = useState("author");
-    const [section, setSection] = useState("section");
-    const [slug, setSlug] = useState("slug");
+    const [author, setAuthor] = useState("");
+    const [section, setSection] = useState("");
+    const [slug, setSlug] = useState("slug10");
 
     const [inputFormData, setInputFormData] = useState();
 
@@ -115,7 +115,7 @@ const UploadPage = (props) => {
         // console.log(formData);
 
         fetch(url, options).catch((error) => console.log(error));
-        console.log(previouslyRegisteredLectures)
+        // console.log(previouslyRegisteredLectures)
     }
 
     const updateThumbnailButton = () => {
@@ -169,6 +169,10 @@ const UploadPage = (props) => {
                             <TextInput value={description} onChangeText={onChangeDescription} style={styles.input} />
                             <Text style={styles.label}>Lecture's Subject</Text>
                             <TextInput value={subject} onChangeText={onChangeSubject} style={styles.input} />
+                            <Text style={styles.label}>Lecture's Professor Author</Text>
+                            <TextInput value={author} onChangeText={setAuthor} style={styles.input} />
+                            <Text style={styles.label}>Lecture's Section</Text>
+                            <TextInput value={section} onChangeText={setSection} style={styles.input} />
 
                             <Button 
                                 title="Upload" 

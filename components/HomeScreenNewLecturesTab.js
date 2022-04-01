@@ -60,17 +60,17 @@ const HomeScreenNewLecturesTab = (props) => {
   };
 
   function getWeekDates() {
+    //filter lecture within 3 days before
     let now = new Date();
-    // now.setHours(now.getHours() + 7);
     let dayOfWeek = now.getDay(); //0-6
     let numDay = now.getDate();
 
     let start = new Date(now); //copy
-    start.setDate(numDay - dayOfWeek);
+    start.setDate(numDay - 2);
     start.setHours(0, 0, 0, 0);
 
     let end = new Date(now); //copy
-    end.setDate(numDay + (3 - dayOfWeek));
+    end.setDate(numDay + 1);
     end.setHours(0, 0, 0, 0);
 
     return [start, end];
