@@ -19,7 +19,7 @@ import HomeScreenLecturesItem from "./HomeScreenLecturesItem";
 
 import MyHeaderIcon from "./MyHeaderIcon";
 
-const HomeScreenLecturesTab = (props) => {
+const HomeScreenNewLecturesTab = (props) => {
   const navigation = useNavigation();
   const { tabTitle } = props;
 
@@ -51,11 +51,92 @@ const HomeScreenLecturesTab = (props) => {
   }, [dispatch, loadRegis]);
 
   const changeScreenHandler = () => {
-    // const screenRoute = tabTitle.split(" ").join("") + "Screen";
-    const screenRoute = "AllLecturesScreen";
+    const screenRoute = 'NewLecturesScreen';
     console.log(screenRoute);
+    // navigation.navigate("LinkToLectureRegistrationScreen", {
+    //   screen: screenRoute,
+    // });
     navigation.navigate(screenRoute);
   };
+
+  function getWeekDates() {
+    let now = new Date();
+    // now.setHours(now.getHours() + 7);
+    let dayOfWeek = now.getDay(); //0-6
+    let numDay = now.getDate();
+
+    let start = new Date(now); //copy
+    start.setDate(numDay - dayOfWeek);
+    start.setHours(0, 0, 0, 0);
+
+    let end = new Date(now); //copy
+    end.setDate(numDay + (3 - dayOfWeek));
+    end.setHours(0, 0, 0, 0);
+
+    return [start, end];
+  }
+
+  function filterDatesByCurrentWeek(dates){
+    let [start, end] = getWeekDates();
+    return dates.filter(d => +d.createdAt >= +start && +d.createdAt < +end);
+ }
+  let lecturesArrayWithDates = [];
+
+  lecturesArrayWithDates = previouslyRegisteredLectured.map((item) => {
+    const itemDate = new Date(item.createdAt);
+    return{...item, createdAt: itemDate};
+  });
+
+  lecturesArrayWithDates = filterDatesByCurrentWeek(lecturesArrayWithDates);
+  // console.log('Filtered Items Down Below')
+  // console.log(filterDatesByCurrentWeek(lecturesArrayWithDates));
+
+  if(lecturesArrayWithDates.length <= 2){
+    return (
+      <View style={styles.container}>
+        <View style={styles.tabTitleContainer}>
+          <Text style={styles.descriptionText}>{tabTitle}</Text>
+          <View style={styles.tabIcon}>
+            <MyHeaderIcon
+              iconName="ios-arrow-forward-outline"
+              style={{ marginLeft: -10 }}
+              onPress={changeScreenHandler}
+              color="black"
+            />
+          </View>
+        </View>
+        <ScrollView
+          contentContainerStyle={{width: '100%'}}
+          horizontal={true}
+        >
+          {lecturesArrayWithDates.map((itemData, index) => {
+            return (
+              <View
+                style={{
+                  padding: 0,
+                  alignItems: 'flex-start',
+                  flexDirection: "column",
+                }}
+                key={index}
+              >
+                <HomeScreenLecturesItem
+                  key={itemData}
+                  lectureThumbnail={itemData.thumbnail.url}
+                  lectureDescription={itemData.description}
+                  onSelect={() => {
+                    navigation.navigate("SinglePost", {
+                      itemId: itemData.id,
+                    });
+                  }}
+                />
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
+    );
+  }
+  
   return (
     <View style={styles.container}>
       <View style={styles.tabTitleContainer}>
@@ -73,7 +154,7 @@ const HomeScreenLecturesTab = (props) => {
         contentContainerStyle={styles.lectureContainers}
         horizontal={true}
       >
-        {previouslyRegisteredLectured.map((itemData, index) => {
+        {lecturesArrayWithDates.map((itemData, index) => {
           return (
             <View
               style={{
@@ -82,6 +163,7 @@ const HomeScreenLecturesTab = (props) => {
               key={index}
             >
               <HomeScreenLecturesItem
+                key={itemData}
                 lectureThumbnail={itemData.thumbnail.url}
                 lectureDescription={itemData.description}
                 onSelect={() => {
@@ -111,8 +193,8 @@ const styles = StyleSheet.create({
   },
   lectureContainers: {
     // width: 387,
-    // flexDirection: "row",
-    // alignItems: "flex-start",
+    flexDirection: "row",
+    alignItems: "flex-start",
   },
   descriptionText: {
     fontFamily: "Prompt",
@@ -130,4 +212,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreenLecturesTab;
+export default HomeScreenNewLecturesTab;

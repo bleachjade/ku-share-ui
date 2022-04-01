@@ -68,12 +68,12 @@ const LoginScreen = (props) => {
     // const userEmail = formState.inputValues.userEmail;
     // const userPassword = formState.inputValues.userPassword;
     if (!isSignUp) {
-      console.log("login");
-      console.log({ userEmail, userPassword });
+      // console.log("login");
+      // console.log({ userEmail, userPassword });
       action = authActions.login(userEmail, userPassword);
     } else {
-      console.log("sign up");
-      console.log({ userEmail, userPassword });
+      // console.log("sign up");
+      // console.log({ userEmail, userPassword });
       action = authActions.signup(userEmail, userPassword);
     }
     setErrorText(null);

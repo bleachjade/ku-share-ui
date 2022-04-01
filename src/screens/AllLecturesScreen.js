@@ -95,9 +95,6 @@ const AllLecturesScreen = (props) => {
 
   return (
     <View>
-      {/* <Text>AllLecturesScreen</Text> */}
-      {/* <Text> 1: {previouslyRegisteredLectured[0].filePath}</Text>
-      <Text> 2: {previouslyRegisteredLectured[1].filePath}</Text> */}
       <FlatList
         onRefresh={loadRegis}
         refreshing={isRefreshing}

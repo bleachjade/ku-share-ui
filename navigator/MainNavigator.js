@@ -52,17 +52,17 @@ const defaultScreenOptions = {
   headerTintColor: "white",
 };
 
-const LectureRegistrationScreens = (props) => {
-  return (
-    <LectureRegistrationStack.Navigator
-      initialRouteName="NewLecturesScreen"
-      screenOptions={{ ...defaultScreenOptions }}
-    >
-      <Stack.Screen name="NewLecturesScreen" component={NewLecturesScreen} options={{headerShown: false}}/>
-      <Stack.Screen name="AllLecturesScreen" component={AllLecturesScreen} options={{headerShown: false}}/>
-    </LectureRegistrationStack.Navigator>
-  );
-};
+// const LectureRegistrationScreens = (props) => {
+//   return (
+//     <LectureRegistrationStack.Navigator
+//       initialRouteName="NewLecturesScreen"
+//       screenOptions={{ ...defaultScreenOptions }}
+//     >
+//       <Stack.Screen name="NewLecturesScreen" component={NewLecturesScreen} options={{headerShown: false}}/>
+//       <Stack.Screen name="AllLecturesScreen" component={AllLecturesScreen} options={{headerShown: false}}/>
+//     </LectureRegistrationStack.Navigator>
+//   );
+// };
 
 const DrawerMenu = () => {
   return (
@@ -114,8 +114,8 @@ const DrawerMenu = () => {
         }}
       /> */}
       <Stack.Screen
-        name="LinkToLectureRegistrationScreen"
-        component={LectureRegistrationScreens}
+        name="NewLecturesScreen"
+        component={NewLecturesScreen}
         options={{
           title: "New Lectures",
           headerShown: true,

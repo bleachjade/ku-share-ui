@@ -7,6 +7,7 @@ import {
 } from "react-native-header-search-bar";
 
 import HomeScreenLecturesTab from "../../components/HomeScreenLecturesTab";
+import HomeScreenNewLecturesTab from "../../components/HomeScreenNewLecturesTab";
 import HomeScreenNewsTab from "../../components/HomeScreenNewsTab";
 
 import List from "../../components/List";
@@ -52,8 +53,8 @@ const Home = ({ navigation }) => {
         showsVerticalScrollIndicator={false} 
         >
         <HomeScreenNewsTab />
-        <HomeScreenLecturesTab tabTitle={"New Lectures"} />
         <HomeScreenLecturesTab tabTitle={"All Lectures"} />
+        <HomeScreenNewLecturesTab tabTitle={"New Lectures"} />
       </ScrollView>
     </View>
   );
