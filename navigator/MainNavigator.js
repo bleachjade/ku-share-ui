@@ -18,6 +18,7 @@ import SplashScreen from "../src/screens/SplashScreen";
 import AuthenticationScreen from "../src/screens/AuthenticationScreen";
 import NewLecturesScreen from "../src/screens/NewLecturesScreen";
 import AllLecturesScreen from "../src/screens/AllLecturesScreen";
+import SearchPage from "../src/screens/SearchPage";
 import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -129,6 +130,17 @@ const DrawerMenu = () => {
         component={AllLecturesScreen}
         options={{
           title: "All Lectures",
+          headerShown: true,
+          drawerIcon: () => (
+            <MaterialCommunityIcons name="playlist-star" size={24} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="SearchPage"
+        component={SearchPage}
+        options={{
+          title: "Search Page",
           headerShown: true,
           drawerIcon: () => (
             <MaterialCommunityIcons name="playlist-star" size={24} />

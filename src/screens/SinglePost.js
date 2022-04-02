@@ -7,15 +7,14 @@ import SinglePdfView from './SinglePdfView';
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
 
-const SinglePost = (props) => {
+const SinglePost = ({ route, navigation }) => {
   const allLectures = useSelector(
     (state) => state.registration.prevLectures
   );
   const authUserProfile = useSelector((state) => state.auth.userProfile);
 
-
-
-  let selectedId = props.route.params.itemId;
+  let selectedId = route.params.itemId;
+  // console.log(selectedId);
   let copiedItem = allLectures.map((item) => item);
   let filteredItem = copiedItem.find((item) => item.id == selectedId);
     
