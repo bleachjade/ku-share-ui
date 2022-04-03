@@ -58,7 +58,7 @@ const SearchPage = (props) => {
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#5500dc" />
+        <ActivityIndicator size="large" color={Colors.primaryColor} />
       </View>
     );
   }
@@ -98,6 +98,7 @@ const SearchPage = (props) => {
         style={{
           backgroundColor: '#fff',
           padding: 10,
+          marginHorizontal: 10,
           marginVertical: 10,
           borderRadius: 20
         }}
@@ -106,7 +107,7 @@ const SearchPage = (props) => {
           clearButtonMode="always"
           value={query}
           onChangeText={queryText => handleSearch(queryText)}
-          placeholder="Search"
+          placeholder="Search Lecture's Title..."
           style={{ backgroundColor: '#fff', paddingHorizontal: 20 }}
         />
       </View>
@@ -114,7 +115,7 @@ const SearchPage = (props) => {
   }
 
   return (
-    <View>
+    <View style={styles.viewContainer}>
       {renderHeader()}
        <FlatList
         // ListHeaderComponent={renderHeader}
@@ -154,8 +155,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.baseBackground,
+    backgroundColor: Colors.white,
     width: "100%",
+  },
+  viewContainer: {
+    backgroundColor: Colors.primaryColorOpacityDown
   },
   text: {
     fontSize: 20,

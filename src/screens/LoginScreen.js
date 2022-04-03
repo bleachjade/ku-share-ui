@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Alert,
+  ActivityIndicator
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { NavigationActions } from 'react-navigation'
@@ -87,6 +88,14 @@ const LoginScreen = (props) => {
       setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={Colors.primaryColor} />
+      </View>
+    );
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
