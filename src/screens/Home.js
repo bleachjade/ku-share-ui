@@ -36,13 +36,6 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchBarContainer}>
-      <SearchBar
-        placeholder="Search Lecture Here..."
-        onChangeText={updateSearch}
-        value={search}
-        containerStyle={styles.searchBar}
-        inputContainerStyle={styles.searchInput}
-      />
       </View>
       <ScrollView 
         contentContainerStyle={styles.scrollContainers} 
@@ -73,28 +66,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: "100%",
     borderRadius: 22,
-    // flex: 1,
-    // marginTop: 45,
-    paddingTop: 50,
-    paddingLeft: 50,
-    paddingRight: 10,
-    paddingBottom: 10,
-  },
-  searchBar: {
-    backgroundColor: "white",
-    borderWidth: 0,
-    borderTopColor: "transparent",
-    borderBottomColor: "transparent",
-    padding: 0,
-  },
-  searchInput: {
-    backgroundColor: "white",
-    borderColor: Colors.borderColor,
-    borderWidth: 1,
-    borderBottomWidth: 1,
-    borderRadius: 100,
-    height: 40,
-    padding: 0
+    flex: 1,
+    paddingVertical: 20,
   },
   scrollContainers: {
     flexDirection: "column",

@@ -11,6 +11,7 @@ import {
   FontAwesome
 } from "@expo/vector-icons";
 import { StyleSheet, Image, View } from "react-native";
+import { Icon } from 'react-native-elements';
 
 import Home from "../src/screens/Home";
 import InstructionPage from "../src/screens/InstructionPage";
@@ -33,6 +34,8 @@ import Colors from "../constants/Colors";
 import SinglePost from "../src/screens/SinglePost";
 import SingleNews from "../src/screens/SingleNews";
 import SinglePdfView from "../src/screens/SinglePdfView";
+
+import { useNavigation } from "@react-navigation/native";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -68,10 +71,20 @@ const LectureRegistrationScreens = (props) => {
 };
 
 const DrawerMenu = () => {
+  const navigation = useNavigation();
+
   return (
     <Drawer.Navigator
     drawerStyle={styles.drawerMenu}
       screenOptions={{
+        headerRight: props => <Icon 
+          name='search'
+          type='font-awesome'
+          color={Colors.primaryColor}
+          containerStyle={styles.searchIconContainer}
+          onPress={() => navigation.navigate("SearchPage")}
+        />,
+        
         headerTintColor: Colors.primaryColor,
         drawerActiveBackgroundColor: "#04DB8BB3",
         drawerInactiveBackgroundColor: "rgba(4, 219, 139, 0.1)",
@@ -124,7 +137,7 @@ const DrawerMenu = () => {
           title: "New Lectures",
           headerShown: true,
           drawerIcon: () => (
-            <MaterialCommunityIcons name="playlist-star" size={24} />
+            <MaterialCommunityIcons name="refresh" size={24} />
           ),
         }}
       />
@@ -135,7 +148,7 @@ const DrawerMenu = () => {
           title: "All Lectures",
           headerShown: true,
           drawerIcon: () => (
-            <MaterialCommunityIcons name="playlist-star" size={24} />
+            <MaterialCommunityIcons name="database-search" size={24} />
           ),
         }}
       />
@@ -143,10 +156,10 @@ const DrawerMenu = () => {
         name="SearchPage"
         component={SearchPage}
         options={{
-          title: "Search Page",
+          title: "Search Lecture Page",
           headerShown: true,
           drawerIcon: () => (
-            <MaterialCommunityIcons name="playlist-star" size={24} />
+            <MaterialCommunityIcons name="book-search" size={24} />
           ),
         }}
       />
@@ -177,7 +190,7 @@ const DrawerMenu = () => {
           title: "Profile",
           headerShown: true,
           drawerIcon: () => (
-            <FontAwesome name="user" size={24} />
+            <MaterialIcons name="person" size={24} />
           ),
         }}
       />
@@ -253,6 +266,9 @@ const styles = StyleSheet.create({
   drawerMenu: {
     flex: 0,
   },
+  searchIconContainer: {
+    marginRight: 20
+  }
 });
 
 export default MainNavigator;
