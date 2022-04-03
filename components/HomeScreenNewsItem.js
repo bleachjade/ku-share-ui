@@ -1,29 +1,38 @@
-import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
 import Card from "./Card";
 import Colors from "../constants/Colors";
 
-const HomeScreenNewsItem = () => {
+const HomeScreenNewsItem = (props) => {
+  const title = props.title;
+  const content = props.content;
+  const image = props.image;
+  const category = props.category;
+ 
+  let TouchableCmp = TouchableOpacity;
+
   return (
     <View style={styles.customCard}>
+      <TouchableCmp onPress={props.onSelect}>
       <View style={styles.container}>
         <ImageBackground
           style={styles.imageStyle}
-          source={require("../assets/NewsTabIcons/unsplash_4-EeTnaC1S4.png")}
+          source={{ uri: image }}
         ></ImageBackground>
         <View style={styles.newsTitle}>
-          <Text style={styles.descriptionText}>News Description</Text>
-          <Text style={styles.descriptionText2}>News</Text>
+          <Text style={styles.title} ellipsizeMode='tail' numberOfLines={1}>{title}</Text>
+          <Text style={styles.descriptionText2} ellipsizeMode='tail' numberOfLines={1}>{category}</Text>
         </View>
       </View>
+      </TouchableCmp>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "white",
     height: 195,
     width: 200,
@@ -45,7 +54,7 @@ const styles = StyleSheet.create({
     height: 55,
     borderRadius: 10,
   },
-  descriptionText: {
+  title: {
     fontFamily: "Prompt",
     fontSize: 12,
     fontWeight: "normal",

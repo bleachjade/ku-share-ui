@@ -27,9 +27,11 @@ import Profile from "../src/screens/Profile";
 import UploadPage from "../src/screens/UploadPage";
 
 import Logo from "../components/LogoSvg";
+import MyHeaderIcon from "../components/MyHeaderIcon";
 
 import Colors from "../constants/Colors";
 import SinglePost from "../src/screens/SinglePost";
+import SingleNews from "../src/screens/SingleNews";
 import SinglePdfView from "../src/screens/SinglePdfView";
 
 const Drawer = createDrawerNavigator();
@@ -68,8 +70,9 @@ const LectureRegistrationScreens = (props) => {
 const DrawerMenu = () => {
   return (
     <Drawer.Navigator
-      style={styles.drawerMenu}
+    drawerStyle={styles.drawerMenu}
       screenOptions={{
+        headerTintColor: Colors.primaryColor,
         drawerActiveBackgroundColor: "#04DB8BB3",
         drawerInactiveBackgroundColor: "rgba(4, 219, 139, 0.1)",
         drawerActiveTintColor: "#fff",
@@ -227,6 +230,15 @@ const MainNavigator = () => {
           headerShown: true,
           headerBackTitle: 'Back',
           headerTitle: 'PDF Details'
+        }}
+      />
+      <Stack.Screen
+        name="SingleNews"
+        component={SingleNews}
+        options={{
+          headerShown: true,
+          headerBackTitle: 'Back',
+          headerTitle: 'News Details'
         }}
       />
     </Stack.Navigator>
