@@ -7,16 +7,18 @@ import SinglePdfView from './SinglePdfView';
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';
 
-const SinglePost = ({ route, navigation }) => {
+const SinglePost = (props) => {
   const allLectures = useSelector(
     (state) => state.registration.prevLectures
   );
   const authUserProfile = useSelector((state) => state.auth.userProfile);
 
-  let selectedId = route.params.itemId;
+  let selectedId = props.route.params.itemId;
   // console.log(selectedId);
   let copiedItem = allLectures.map((item) => item);
+  // console.log(copiedItem);
   let filteredItem = copiedItem.find((item) => item.id == selectedId);
+  // console.log(filteredItem);
     
   let singlePostImage = { uri : filteredItem.thumbnail.url };
 

@@ -8,6 +8,8 @@ import {
   View,
   FlatList,
   ActivityIndicator,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
   TextInput
 } from 'react-native';
 import filter from 'lodash.filter';
@@ -16,6 +18,10 @@ import { useNavigation } from "@react-navigation/native";
 
 
 import HomeScreenLecturesItem from "../../components/HomeScreenLecturesItem";
+
+import Loader from "../../components/Loader";
+import Colors from "../../constants/Colors";
+import Fonts from "../../constants/Fonts";
 
 
 const API_ENDPOINT = `https://ku-share-backend.herokuapp.com/lecture/fetch`;
@@ -27,8 +33,9 @@ const SearchPage = (props) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState(null);
 
-  const [query, setQuery] = useState('');
   const [fullData, setFullData] = useState([]);
+  const [query, setQuery] = useState('');
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -64,10 +71,10 @@ const SearchPage = (props) => {
         </Text>
       </View>
     );
-  }
+  }  
 
+  
   const renderHeader = () => {
-
     const handleSearch = text => {
       const formattedQuery = text.toLowerCase();
       const filteredData = filter(fullData, title => {
@@ -78,18 +85,14 @@ const SearchPage = (props) => {
     };
     
     const contains = ({title}, query) => {
-      // console.log(lectureTitle);
-      // console.log(title);
-      // console.log(query);
-
-    
+  
       if (title.includes(query)) {
         return true;
       }
-    
+  
       return false;
     };
-
+  
     return (
       <View
         style={{
@@ -112,8 +115,10 @@ const SearchPage = (props) => {
 
   return (
     <View>
+      {renderHeader()}
        <FlatList
-        ListHeaderComponent={renderHeader}
+        // ListHeaderComponent={renderHeader}
+        // removeClippedSubviews={false}
         refreshing={isRefreshing}
         data={data}
         keyExtractor={(item, index) => item._id}
@@ -141,12 +146,16 @@ const SearchPage = (props) => {
   );
 
 }
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.baseBackground,
+    width: "100%",
   },
   text: {
     fontSize: 20,
