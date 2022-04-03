@@ -3,7 +3,6 @@ import { View, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, Scrol
 import { Button } from 'react-native-elements';
 import { useSelector, useDispatch } from "react-redux";
 
-import * as Linking from 'expo-linking';
 
 import Colors from '../../constants/Colors';
 import Fonts from '../../constants/Fonts';

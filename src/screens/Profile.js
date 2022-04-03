@@ -6,6 +6,8 @@ import Fonts from '../../constants/Fonts';
 import HomeScreenLecturesTab from "../../components/HomeScreenLecturesTab";
 import HomeScreenLecturesItem from "../../components/HomeScreenLecturesItem";
 
+import MyLecturesTab from '../../components/MyLecturesTab';
+
 const Profile = () => {
   const authUserProfile = useSelector((state) => state.auth.userProfile);
   const backgroundImage = require('../../assets/profile_bg.png');
@@ -28,8 +30,8 @@ const Profile = () => {
             bounces={false} 
             showsVerticalScrollIndicator={false} 
             >
-            <HomeScreenLecturesTab tabTitle={"My Lectures"} />
-            <HomeScreenLecturesTab tabTitle={"Favorite Lectures"} />
+            <MyLecturesTab tabTitle={"My Lectures"}/>
+            {/* <HomeScreenLecturesTab tabTitle={"Favorite Lectures"} /> */}
         </ScrollView>
       </ImageBackground>
     </View>
