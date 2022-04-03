@@ -9,7 +9,7 @@ export const fetchLectures = () => {
       const myUserId = getState().auth.userId;
       
       const response = await fetch(
-        `http://localhost:3001/lecture/fetch?userId=${myUserId}`
+        `https://ku-share-backend.herokuapp.com/lecture/fetch?userId=${myUserId}`
       );
       // const response = await fetch(
       //   `http://localhost:3001/lecture-local/fetch`

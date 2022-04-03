@@ -38,9 +38,9 @@ const UploadPage = (props) => {
     const [title, onChangeTitle] = useState("");
     const [description, onChangeDescription] = useState("");
     const [subject, onChangeSubject] = useState("");
-    const [author, setAuthor] = useState("");
-    const [section, setSection] = useState("");
-    const [slug, setSlug] = useState("slug10");
+    const [author, setAuthor] = useState("author");
+    const [section, setSection] = useState("section");
+    const [slug, setSlug] = useState("");
 
     const [inputFormData, setInputFormData] = useState();
 
@@ -83,7 +83,7 @@ const UploadPage = (props) => {
     }
 
     const postDocument = () => {
-        const url = "http://localhost:3001/lecture/upload";
+        const url = "https://ku-share-backend.herokuapp.com/lecture/upload";
         const fileUri = doc.uri;
         const formData = new FormData();
 
@@ -135,6 +135,14 @@ const UploadPage = (props) => {
                 />
     }
 
+    const convertToSlug = (Text) => {
+        return Text
+        .toLowerCase()
+        .replace(/ /g,'-')
+        .replace(/[^\w-]+/g,'')
+        ;
+    }
+
     return (       
             // <KeyboardAvoidingView
             //     behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -165,6 +173,8 @@ const UploadPage = (props) => {
                             { updateThumbnailButton() }
                             <Text style={styles.label}>Lecture's Title</Text>
                             <TextInput value={title} onChangeText={onChangeTitle} style={styles.input} />
+                            <Text style={styles.label}>Lecture's Slug</Text>
+                            <TextInput defaultValue={convertToSlug(title)} onChangeText={setSlug} style={styles.input} />
                             <Text style={styles.label}>Lecture's Description</Text>
                             <TextInput value={description} onChangeText={onChangeDescription} style={styles.input} />
                             <Text style={styles.label}>Lecture's Subject</Text>

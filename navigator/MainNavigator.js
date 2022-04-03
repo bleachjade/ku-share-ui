@@ -11,6 +11,7 @@ import {
   FontAwesome
 } from "@expo/vector-icons";
 import { StyleSheet, Image, View } from "react-native";
+import { Icon } from 'react-native-elements';
 
 import Home from "../src/screens/Home";
 import InstructionPage from "../src/screens/InstructionPage";
@@ -18,6 +19,7 @@ import SplashScreen from "../src/screens/SplashScreen";
 import AuthenticationScreen from "../src/screens/AuthenticationScreen";
 import NewLecturesScreen from "../src/screens/NewLecturesScreen";
 import AllLecturesScreen from "../src/screens/AllLecturesScreen";
+import SearchPage from "../src/screens/SearchPage";
 import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -26,10 +28,14 @@ import Profile from "../src/screens/Profile";
 import UploadPage from "../src/screens/UploadPage";
 
 import Logo from "../components/LogoSvg";
+import MyHeaderIcon from "../components/MyHeaderIcon";
 
 import Colors from "../constants/Colors";
 import SinglePost from "../src/screens/SinglePost";
+import SingleNews from "../src/screens/SingleNews";
 import SinglePdfView from "../src/screens/SinglePdfView";
+
+import { useNavigation } from "@react-navigation/native";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -65,10 +71,21 @@ const defaultScreenOptions = {
 // };
 
 const DrawerMenu = () => {
+  const navigation = useNavigation();
+
   return (
     <Drawer.Navigator
-      style={styles.drawerMenu}
+    drawerStyle={styles.drawerMenu}
       screenOptions={{
+        headerRight: props => <Icon 
+          name='search'
+          type='font-awesome'
+          color={Colors.primaryColor}
+          containerStyle={styles.searchIconContainer}
+          onPress={() => navigation.navigate("SearchPage")}
+        />,
+        
+        headerTintColor: Colors.primaryColor,
         drawerActiveBackgroundColor: "#04DB8BB3",
         drawerInactiveBackgroundColor: "rgba(4, 219, 139, 0.1)",
         drawerActiveTintColor: "#fff",
@@ -120,7 +137,7 @@ const DrawerMenu = () => {
           title: "New Lectures",
           headerShown: true,
           drawerIcon: () => (
-            <MaterialCommunityIcons name="playlist-star" size={24} />
+            <MaterialCommunityIcons name="refresh" size={24} />
           ),
         }}
       />
@@ -131,7 +148,18 @@ const DrawerMenu = () => {
           title: "All Lectures",
           headerShown: true,
           drawerIcon: () => (
-            <MaterialCommunityIcons name="playlist-star" size={24} />
+            <MaterialCommunityIcons name="database-search" size={24} />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="SearchPage"
+        component={SearchPage}
+        options={{
+          title: "Search Lecture Page",
+          headerShown: true,
+          drawerIcon: () => (
+            <MaterialCommunityIcons name="book-search" size={24} />
           ),
         }}
       />
@@ -162,7 +190,7 @@ const DrawerMenu = () => {
           title: "Profile",
           headerShown: true,
           drawerIcon: () => (
-            <FontAwesome name="user" size={24} />
+            <MaterialIcons name="person" size={24} />
           ),
         }}
       />
@@ -217,6 +245,15 @@ const MainNavigator = () => {
           headerTitle: 'PDF Details'
         }}
       />
+      <Stack.Screen
+        name="SingleNews"
+        component={SingleNews}
+        options={{
+          headerShown: true,
+          headerBackTitle: 'Back',
+          headerTitle: 'News Details'
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -229,6 +266,9 @@ const styles = StyleSheet.create({
   drawerMenu: {
     flex: 0,
   },
+  searchIconContainer: {
+    marginRight: 20
+  }
 });
 
 export default MainNavigator;
