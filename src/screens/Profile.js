@@ -10,7 +10,7 @@ const Profile = () => {
   const authUserProfile = useSelector((state) => state.auth.userProfile);
   const backgroundImage = require('../../assets/profile_bg.png');
 
-  const profileImage = require('../../assets/icon.png');
+  const profileImage = require('../../assets/avatar_image_user.png');
 
   return (
     <View style={styles.container}>
