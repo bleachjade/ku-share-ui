@@ -15,18 +15,18 @@ import List from "../../components/List";
 import Colors from "../../constants/Colors";
 
 const Home = ({ navigation }) => {
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerStyle: {
-        backgroundColor: "#222",
-        borderBottomWidth: 0,
-        shadowColor: "transparent",
-      },
-      headerTransparent: {
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerStyle: {
+  //       backgroundColor: "#222",
+  //       borderBottomWidth: 0,
+  //       shadowColor: "transparent",
+  //     },
+  //     headerTransparent: {
 
-      },
-    });
-  }, [navigation]);
+  //     },
+  //   });
+  // }, [navigation]);
 
   const [search, setSearch] = useState("");
 
@@ -36,19 +36,21 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchBarContainer}>
+      {/* <View style={styles.searchBarContainer}>
+      </View> */}
+      <View style={styles.viewWrapper}>
+        <ScrollView 
+          contentContainerStyle={styles.scrollContainers} 
+          horizontal={false} 
+          scrollEnabled={true} 
+          bounces={false} 
+          showsVerticalScrollIndicator={false} 
+          >
+          <HomeScreenNewsTab />
+          <HomeScreenLecturesTab tabTitle={"All Lectures"} />
+          <HomeScreenNewLecturesTab tabTitle={"New Lectures"} />
+        </ScrollView>
       </View>
-      <ScrollView 
-        contentContainerStyle={styles.scrollContainers} 
-        horizontal={false} 
-        scrollEnabled={true} 
-        bounces={false} 
-        showsVerticalScrollIndicator={false} 
-        >
-        <HomeScreenNewsTab />
-        <HomeScreenLecturesTab tabTitle={"All Lectures"} />
-        <HomeScreenNewLecturesTab tabTitle={"New Lectures"} />
-      </ScrollView>
     </View>
   );
 };
@@ -56,19 +58,22 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: Colors.primaryColorOpacityDown
+  },
+  viewWrapper: {
+    flex: 1,
   },
   text: {
     fontSize: 20,
     color: "white",
   },
   searchBarContainer: {
-    backgroundColor: "white",
-    width: "100%",
-    borderRadius: 22,
-    flex: 1,
-    paddingVertical: 20,
+    // backgroundColor: "white",
+    // width: "100%",
+    // borderRadius: 22,
+    // flex: 1,
+    // paddingVertical: 20,
   },
   scrollContainers: {
     flexDirection: "column",
