@@ -53,11 +53,22 @@ const UploadPage = (props) => {
 
   const [inputFormData, setInputFormData] = useState();
 
+  const isLessThanTheMB = (fileSize, smallerThanSizeMB) => {
+    const isOk = fileSize / 1024 / 1024 < smallerThanSizeMB
+    return isOk
+ }
+
   const pickDocument = async () => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "application/pdf",
       copyToCacheDirectory: true,
     }).then((response) => {
+      const isLt5MB = isLessThanTheMB(response.size, 5);
+      if (!isLt5MB) {
+        let message = "File size must be smaller than 5MB!";
+        Alert.alert("Error!", message, [{ text: "Okay" }]);
+        throw new Error(message);
+      }
       if (response.type == "success") {
         let { name, size, uri } = response;
         let nameParts = name.split(".");
@@ -79,6 +90,12 @@ const UploadPage = (props) => {
       type: "image/*",
       copyToCacheDirectory: true,
     }).then((response) => {
+      const isLt3MB = isLessThanTheMB(response.size, 3);
+      if (!isLt3MB) {
+        let message = "Image size must be smaller than 3MB!";
+        Alert.alert("Error!", message, [{ text: "Okay" }]);
+        throw new Error(message);
+      }
       if (response.type == "success") {
         let { name, size, uri } = response;
         let nameParts = name.split(".");
@@ -172,7 +189,10 @@ const UploadPage = (props) => {
     //     behavior={Platform.OS === "ios" ? "padding" : "height"}
     //     style={styles.container}
     //     >
-    <KeyboardAwareScrollView style={styles.container}>
+    <KeyboardAwareScrollView 
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      >
       <View style={styles.innerContainer}>
         <View style={styles.uploadContainer}>
           <Button
@@ -204,9 +224,11 @@ const UploadPage = (props) => {
             />
             <Text style={styles.label}>Lecture's Slug</Text>
             <TextInput
+              value={convertToSlug(title)}
               defaultValue={convertToSlug(title)}
+              editable={false} 
               onChangeText={setSlug}
-              style={styles.input}
+              style={styles.inputDisabled}
             />
             <Text style={styles.label}>Lecture's Description</Text>
             <TextInput
@@ -313,6 +335,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: "#00000059",
     marginVertical: 20,
+  },
+  inputDisabled: {
+    height: 24,
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#00000059",
+    marginVertical: 20,
+    backgroundColor: '#00000010',
   },
   submitButton: {
     backgroundColor: Colors.primaryColor,
