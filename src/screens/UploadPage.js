@@ -64,8 +64,11 @@ const UploadPage = (props) => {
       copyToCacheDirectory: true,
     }).then((response) => {
       const isLt5MB = isLessThanTheMB(response.size, 5);
-      if (!isLt5MB) {
-        let message = "File size must be smaller than 5MB!";
+      if (response.type == 'cancel') {
+        console.log('cancel');
+      }
+      if (!isLt5MB && response.type != 'cancel') {
+        let message = "file too large";
         Alert.alert("Error!", message, [{ text: "Okay" }]);
         throw new Error(message);
       }
@@ -82,6 +85,8 @@ const UploadPage = (props) => {
         console.log(fileToUpload, "...............file");
         setDoc(fileToUpload);
       }
+    }).catch((err) => {
+      console.log(err);
     });
   };
 
@@ -91,8 +96,11 @@ const UploadPage = (props) => {
       copyToCacheDirectory: true,
     }).then((response) => {
       const isLt3MB = isLessThanTheMB(response.size, 3);
-      if (!isLt3MB) {
-        let message = "Image size must be smaller than 3MB!";
+      if (response.type == 'cancel') {
+        console.log('cancel');
+      }
+      if (!isLt3MB && response.type != 'cancel') {
+        let message = "file too large";
         Alert.alert("Error!", message, [{ text: "Okay" }]);
         throw new Error(message);
       }
@@ -109,6 +117,8 @@ const UploadPage = (props) => {
         console.log(fileToUpload, "...thumbnail");
         setThumbnail(fileToUpload);
       }
+    }).catch((err) => {
+      console.log(err);
     });
   };
 
@@ -242,12 +252,12 @@ const UploadPage = (props) => {
               onChangeText={onChangeSubject}
               style={styles.input}
             />
-            <Text style={styles.label}>Lecture's Professor Author</Text>
+            {/* <Text style={styles.label}>Lecture's Professor Author</Text>
             <TextInput
               value={author}
               onChangeText={setAuthor}
               style={styles.input}
-            />
+            /> */}
             <Text style={styles.label}>Lecture's Section</Text>
             <TextInput
               value={section}
