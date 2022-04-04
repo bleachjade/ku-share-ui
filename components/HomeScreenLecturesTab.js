@@ -83,7 +83,7 @@ const HomeScreenLecturesTab = (props) => {
             >
               <HomeScreenLecturesItem
                 lectureThumbnail={itemData.thumbnail.url}
-                lectureDescription={itemData.description}
+                lectureTitle={itemData.title}
                 onSelect={() => {
                   navigation.navigate("SinglePost", {
                     itemId: itemData.id,

@@ -12,7 +12,7 @@ import Card from "./Card";
 
 const HomeScreenLecturesItem = (props) => {
   let lectureThumbnail = props.lectureThumbnail;
-  let lectureDescription = props.lectureDescription;
+  let lectureTitle = props.lectureTitle;
   let TouchableCmp = TouchableOpacity;
 
   const image = lectureThumbnail
@@ -36,7 +36,7 @@ const HomeScreenLecturesItem = (props) => {
               numberOfLines={1}
               ellipsizeMode="tail"
             >
-              {lectureDescription ? lectureDescription : "Lecture Description"}
+              {lectureTitle ? lectureTitle : "Lecture Title"}
             </Text>
           </LinearGradient>
         </View>

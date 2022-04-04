@@ -122,7 +122,7 @@ const HomeScreenNewLecturesTab = (props) => {
                 <HomeScreenLecturesItem
                   key={itemData}
                   lectureThumbnail={itemData.thumbnail.url}
-                  lectureDescription={itemData.description}
+                  lectureTitle={itemData.title}
                   onSelect={() => {
                     navigation.navigate("SinglePost", {
                       itemId: itemData.id,
