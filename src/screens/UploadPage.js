@@ -34,20 +34,15 @@ import Fonts from "../../constants/Fonts";
 const UploadPage = (props) => {
   const dispatch = useDispatch();
   const offlineUserData = useSelector((state) => state.auth);
-  //     const previouslyRegisteredLectures = useSelector(
-  //     (state) => state.registration.prevLectures
-  //   );
-
-  //   useEffect(() => {console.log(offlineUserData)}, [])
-
-  // dont forget createdAt and updatedAt, id
+  const userEmail = useSelector((state) => state.auth.userProfile);
+  // console.log(userEmail)
   const [doc, setDoc] = useState();
   const [thumbnail, setThumbnail] = useState();
 
   const [title, onChangeTitle] = useState("");
   const [description, onChangeDescription] = useState("");
   const [subject, onChangeSubject] = useState("");
-  const [author, setAuthor] = useState("author");
+  const [author, setAuthor] = useState(userEmail.email ? userEmail.email : '');
   const [section, setSection] = useState("section");
   const [slug, setSlug] = useState("");
 
@@ -117,6 +112,8 @@ const UploadPage = (props) => {
     const fileUri = doc.uri;
     const formData = new FormData();
 
+    console.log(offlineUserData.userId);
+
     let userInput = JSON.stringify({
       userId: offlineUserData.userId,
       title: title,
@@ -178,11 +175,11 @@ const UploadPage = (props) => {
     );
   };
 
-  const convertToSlug = (Text) => {
-    return Text.toLowerCase()
-      .replace(/ /g, "-")
-      .replace(/[^\w-]+/g, "");
-  };
+  // const setConvertToSlug = (Text) => {
+  //   return Text.toLowerCase()
+  //     .replace(/ /g, "-")
+  //     .replace(/[^\w-]+/g, "");
+  // };
 
   return (
     // <KeyboardAvoidingView
@@ -222,14 +219,15 @@ const UploadPage = (props) => {
               onChangeText={onChangeTitle}
               style={styles.input}
             />
-            <Text style={styles.label}>Lecture's Slug</Text>
+            {/* <Text style={styles.label}>Lecture's Slug</Text>
             <TextInput
-              value={convertToSlug(title)}
-              defaultValue={convertToSlug(title)}
+              value={slug}
+              placeholder={slug}
+              // defaultValue={slug}
               editable={false} 
-              onChangeText={setSlug}
+              onChangeText={setConvertToSlug(text)}
               style={styles.inputDisabled}
-            />
+            /> */}
             <Text style={styles.label}>Lecture's Description</Text>
             <TextInput
               value={description}
@@ -240,12 +238,6 @@ const UploadPage = (props) => {
             <TextInput
               value={subject}
               onChangeText={onChangeSubject}
-              style={styles.input}
-            />
-            <Text style={styles.label}>Lecture's Professor Author</Text>
-            <TextInput
-              value={author}
-              onChangeText={setAuthor}
               style={styles.input}
             />
             <Text style={styles.label}>Lecture's Section</Text>
