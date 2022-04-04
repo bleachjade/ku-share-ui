@@ -12,6 +12,7 @@ import {
   Button,
   ActivityIndicator,
   FlatList,
+  SafeAreaView
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { useSelector, useDispatch } from "react-redux";
@@ -110,7 +111,7 @@ const NewLecturesScreen = (props) => {
   if (isLoading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color="black" />
+        <ActivityIndicator size="large" color={Colors.primaryColor} />
       </View>
     );
   }
@@ -128,24 +129,18 @@ const NewLecturesScreen = (props) => {
   }
 
   return (
-    <View>
-      <Text style={{textAlign: 'center', marginVertical: 10}}>Showing New lectures from {start.toLocaleDateString()} to {new Date().toLocaleDateString()}</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.textDateHeader}>Showing New lectures from {start.toLocaleDateString()} to {new Date().toLocaleDateString()}</Text>
       <FlatList
         onRefresh={loadRegis}
         refreshing={isRefreshing}
         data={lecturesArrayWithDates}
         keyExtractor={(item, index) => item.id}
         renderItem={(itemData) => (
-          <View
-            style={{
-              flexDirection: "column",
-              margin: 5,
-              marginTop: 20,
-            }}
-          >
+          <View style={styles.lectureItemContainer}>
             <HomeScreenLecturesItem
               lectureThumbnail={itemData.item.thumbnail.url}
-              lectureDescription={itemData.item.description}
+              lectureTitle={itemData.item.title}
               onSelect={() => {
                 props.navigation.navigate("SinglePost", {
                   itemId: itemData.item.id,
@@ -156,19 +151,31 @@ const NewLecturesScreen = (props) => {
         )}
         numColumns={3}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     backgroundColor: Colors.primaryColorOpacityDown,
   },
   text: {
     fontSize: 20,
     color: "white",
+  },
+  textDateHeader: {
+    textAlign: 'center', 
+    marginVertical: 0,
+    fontSize: 14,
+    color: '#fff',
+    backgroundColor: Colors.primaryColor,
+    paddingVertical: 10
+  },
+  lectureItemContainer: {
+    flexDirection: 'column',
+    margin: 0,
+    marginTop: 20
   },
   searchBarContainer: {
     backgroundColor: "white",

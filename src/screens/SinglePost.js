@@ -37,19 +37,18 @@ const SinglePost = (props) => {
         </View>
         <View style={styles.infoContainer}>
             
-            <ScrollView>
-            <Text style={styles.headerText}>Lecture’s Name: { filteredItem.title }</Text>
-            <Text style={styles.secondaryText}>Description: { filteredItem.description }</Text>
-            <Text style={styles.secondaryText}>Subject: { filteredItem.subject }</Text>
-            <Text style={styles.secondaryText}>Professor Name: { filteredItem.author }</Text>
-            <Text style={styles.secondaryText}>Section: { filteredItem.section }</Text>
-
-            
+            <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+              <Text style={styles.headerText}>Lecture’s Name: { filteredItem.title }</Text>
+              <Text style={styles.secondaryText}>Description: { filteredItem.description }</Text>
+              <Text style={styles.secondaryText}>Subject: { filteredItem.subject }</Text>
+              <Text style={styles.secondaryText}>Professor Name: { filteredItem.author }</Text>
+              <Text style={styles.secondaryText}>Section: { filteredItem.section }</Text>
 
             <View style={styles.authorBoxContainer}>
                 <View style={styles.authorBoxWrapper}>
-                    <Image source={authorImage} resizeMode='cover' style={styles.authorImage}></Image>
-                    <Text style={styles.authorName}> Email: { authUserProfile.email }</Text>  
+                    {/* <Image source={authorImage} resizeMode='cover' style={styles.authorImage}></Image> */}
+                    <Text style={styles.authorHeader}> Lecture's Author: </Text>  
+                    <Text style={styles.authorName}> { authUserProfile.email }</Text>  
                 </View>  
             </View>
             </ScrollView>
@@ -75,12 +74,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   infoContainer: {
-    // flex: 1,
+    flex: 1,
     flexDirection: "column",
     justifyContent: "space-evenly",
     fontFamily: Fonts.primaryFont,
     marginVertical: 6,
     paddingHorizontal: 20,
+    height: '100%'
+  },
+  scrollViewContainer: {
+    flex: 1,
+    // justifyContent: 'space-between',
+    height: '100%'
   },
   headerText: {
     fontSize: 18,
@@ -94,13 +99,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   authorBoxContainer: {
-    marginVertical: 30,
-    justifyContent: 'center',
-    alignItems: 'center'
+    // marginVertical: 30,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // width: '100%',
+    // flex: 1,
+    position: 'absolute',
+    bottom: 30,
+    width: '100%'
   },
   authorBoxWrapper: {
-    width: 400,
-    maxHeight: 60,
+    width: '100%',
+    minHeight: 60,
     backgroundColor: Colors.primaryColor,
     color: '#fff',
     flexDirection: 'row',
@@ -122,8 +132,13 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginRight: 15
   },
-  authorName: {
+  authorHeader: {
     fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff'
+  },
+  authorName: {
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#fff'
   }

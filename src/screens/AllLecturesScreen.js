@@ -12,6 +12,7 @@ import {
   Button,
   ActivityIndicator,
   FlatList,
+  SafeAreaView
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { useSelector, useDispatch } from "react-redux";
@@ -76,7 +77,7 @@ const AllLecturesScreen = (props) => {
   if (isLoading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color="black" />
+        <ActivityIndicator size="large" color={Colors.primaryColor} />
       </View>
     );
   }
@@ -94,22 +95,17 @@ const AllLecturesScreen = (props) => {
   }
 
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <FlatList
         onRefresh={loadRegis}
         refreshing={isRefreshing}
         data={previouslyRegisteredLectured}
         keyExtractor={(item, index) => item.id}
         renderItem={(itemData) => (
-          <View
-            style={{
-              flexDirection: 'column',
-              margin: 5,
-              marginTop: 20
-            }}>
+          <View style={styles.lectureItemContainer}>
           <HomeScreenLecturesItem
             lectureThumbnail={itemData.item.thumbnail.url}
-            lectureDescription={itemData.item.description}
+            lectureTitle={itemData.item.title}
             onSelect={() => {props.navigation.navigate("SinglePost", {
               itemId: itemData.item.id,
             });}}
@@ -118,15 +114,19 @@ const AllLecturesScreen = (props) => {
         )}
         numColumns={3}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     backgroundColor: Colors.primaryColorOpacityDown,
+  },
+  lectureItemContainer: {
+    flexDirection: 'column',
+    margin: 0,
+    marginTop: 20
   },
   text: {
     fontSize: 20,

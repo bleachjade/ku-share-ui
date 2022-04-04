@@ -10,7 +10,8 @@ import {
   ActivityIndicator,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  TextInput
+  TextInput,
+  SafeAreaView 
 } from 'react-native';
 import filter from 'lodash.filter';
 import intersection from 'lodash.intersection';
@@ -115,25 +116,21 @@ const SearchPage = (props) => {
   }
 
   return (
-    <View style={styles.viewContainer}>
+    <SafeAreaView style={styles.container}>
       {renderHeader()}
        <FlatList
         // ListHeaderComponent={renderHeader}
         // removeClippedSubviews={false}
+        style={styles.flatlistContainer}
         refreshing={isRefreshing}
         data={data}
         keyExtractor={(item, index) => item._id}
         renderItem={(itemData) => (
-          <View
-            style={{
-              flexDirection: 'column',
-              margin: 5,
-              marginTop: 20
-            }}>
+          <View style={styles.lectureItemContainer}>
           <HomeScreenLecturesItem
             // keyExtractor={(item, index) => item.id}
             lectureThumbnail={itemData.item.thumbnail.url}
-            lectureDescription={itemData.item.description}
+            lectureTitle={itemData.item.title}
             onSelect={() => {navigation.navigate("SinglePost", {
               itemId: itemData.item._id,
             });}}
@@ -142,7 +139,7 @@ const SearchPage = (props) => {
         )}
         numColumns={3}
       />
-    </View>
+    </SafeAreaView >
     
   );
 
@@ -153,13 +150,15 @@ const SearchPage = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: Colors.white,
-    width: "100%",
+    backgroundColor: Colors.primaryColorOpacityDown,
   },
   viewContainer: {
     backgroundColor: Colors.primaryColorOpacityDown
+  },
+  lectureItemContainer: {
+    flexDirection: 'column',
+    margin: 0,
+    marginTop: 20
   },
   text: {
     fontSize: 20,
