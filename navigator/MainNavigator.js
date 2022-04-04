@@ -36,6 +36,7 @@ import SingleNews from "../src/screens/SingleNews";
 import SinglePdfView from "../src/screens/SinglePdfView";
 
 import { useNavigation } from "@react-navigation/native";
+import CustomSidebarMenu from "../components/CustomSideBarMenu";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -75,7 +76,8 @@ const DrawerMenu = () => {
 
   return (
     <Drawer.Navigator
-    drawerStyle={styles.drawerMenu}
+      drawerStyle={styles.drawerMenu}
+      drawerContent={(props) => <CustomSidebarMenu {...props} />}
       screenOptions={{
         headerRight: props => <Icon 
           name='search'
@@ -92,15 +94,16 @@ const DrawerMenu = () => {
         drawerInactiveTintColor: "#04DB8B",
       }}
     >
-      <Stack.Screen
-        name="Logo"
+      {/* <Stack.Screen
+        name="Home"
         component={Home}
         options={{
-          title: "",
+          title: "Home",
           headerShown: true,
           drawerIcon: () => <Logo style={styles.logo} />,
         }}
-      />
+      /> */}
+      
       <Stack.Screen
         name="Explore"
         component={Home}
@@ -110,26 +113,6 @@ const DrawerMenu = () => {
           drawerIcon: () => <MaterialIcons name="explore" size={24} />,
         }}
       />
-      {/* <Stack.Screen
-        name="Publish"
-        component={Home}
-        options={{
-          title: "Publish",
-          headerShown: true,
-          drawerIcon: () => <Entypo name="circle-with-plus" size={24} />,
-        }}
-      /> */}
-      {/* <Stack.Screen
-        name="Your Saved"
-        component={Home}
-        options={{
-          title: "Your Saved",
-          headerShown: true,
-          drawerIcon: () => (
-            <MaterialCommunityIcons name="playlist-star" size={24} />
-          ),
-        }}
-      /> */}
       <Stack.Screen
         name="NewLecturesScreen"
         component={NewLecturesScreen}
@@ -259,10 +242,10 @@ const MainNavigator = () => {
 };
 
 const styles = StyleSheet.create({
-  logo: {
-    width: "100%",
-    height: 100,
-  },
+  // logo: {
+  //   width: "100%",
+  //   height: 100,
+  // },
   drawerMenu: {
     flex: 0,
   },
