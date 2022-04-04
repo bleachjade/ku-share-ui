@@ -41,14 +41,14 @@ const SinglePost = (props) => {
               <Text style={styles.headerText}>Lecture’s Name: { filteredItem.title }</Text>
               <Text style={styles.secondaryText}>Description: { filteredItem.description }</Text>
               <Text style={styles.secondaryText}>Subject: { filteredItem.subject }</Text>
-              <Text style={styles.secondaryText}>Professor Name: { filteredItem.author }</Text>
+              {/* <Text style={styles.secondaryText}>Professor Name: { filteredItem.author }</Text> */}
               <Text style={styles.secondaryText}>Section: { filteredItem.section }</Text>
 
             <View style={styles.authorBoxContainer}>
                 <View style={styles.authorBoxWrapper}>
                     {/* <Image source={authorImage} resizeMode='cover' style={styles.authorImage}></Image> */}
                     <Text style={styles.authorHeader}> Lecture's Author: </Text>  
-                    <Text style={styles.authorName}> { authUserProfile.email }</Text>  
+                    <Text style={styles.authorName}> { filteredItem.author }</Text>  
                 </View>  
             </View>
             </ScrollView>
