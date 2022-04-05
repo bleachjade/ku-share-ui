@@ -101,7 +101,8 @@ const SearchPage = (props) => {
           padding: 10,
           marginHorizontal: 10,
           marginVertical: 10,
-          borderRadius: 20
+          borderRadius: 20,
+          width: '95%'
         }}
       >
         <TextInput
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'column',
     // margin: 10,
     marginTop: 20,
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
   },
   viewContainer: {
     backgroundColor: Colors.primaryColorOpacityDown

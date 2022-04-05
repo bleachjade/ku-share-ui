@@ -178,7 +178,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#fff',
     backgroundColor: Colors.primaryColor,
-    paddingVertical: 10
+    paddingVertical: 10,
+    width: '100%'
   },
   searchBarContainer: {
     backgroundColor: "white",
