@@ -159,6 +159,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.primaryColorOpacityDown,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  lectureItemContainer: {
+    // flexDirection: 'column',
+    // margin: 10,
+    marginTop: 20,
+    justifyContent: 'space-evenly'
   },
   text: {
     fontSize: 20,
@@ -171,11 +179,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     backgroundColor: Colors.primaryColor,
     paddingVertical: 10
-  },
-  lectureItemContainer: {
-    flexDirection: 'column',
-    margin: 0,
-    marginTop: 20
   },
   searchBarContainer: {
     backgroundColor: "white",
